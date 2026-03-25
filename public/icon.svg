@@ -1,0 +1,23 @@
+<svg width="180" height="180" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="120" fill="#FF385C"/>
+  <g transform="translate(106, 110)">
+    <path
+      d="M150 20L20 130H50V250H250V130H280L150 20Z"
+      fill="none"
+      stroke="white"
+      stroke-width="24"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M150 115C150 115 135 100 120 100C105 100 95 110 95 125C95 145 150 180 150 180C150 180 205 145 205 125C205 110 195 100 180 100C165 100 150 115 150 115Z"
+      fill="white"
+    />
+    <path
+      d="M100 250C100 250 100 290 150 330C200 290 200 250 200 250"
+      stroke="white"
+      stroke-width="24"
+      stroke-linecap="round"
+    />
+    <rect x="135" y="210" width="30" height="40" rx="4" fill="white"/>
+  </g>
+</svg>
