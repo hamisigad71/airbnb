@@ -1376,16 +1376,16 @@ export default function GuestHome() {
           .gd-hs-field { width: 100%; height: 60px; border-right: none; border-bottom: 1px solid oklch(0.92 0.002 0); border-radius: 12px; background: oklch(0.975 0.001 0); padding: 0 18px; }
           .gd-hs-field:last-of-type { border-bottom: none; }
           .gd-hs-btn { width: 100%; height: 54px; border-radius: 12px; justify-content: center; margin: 4px 0 0; }
-          .gd-hero-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; transform: none; }
+          .gd-hero-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; transform: none; }
           .gd-stat { padding: 12px 8px; flex-direction: column; text-align: center; gap: 8px; min-height: 110px; justify-content: center; background: rgba(255,255,255,1); border: 1px solid var(--border); }
           .gd-stat-icon { width: 32px; height: 32px; border-radius: 10px; }
           .gd-stat-val { font-size: 1.1rem; }
           .gd-stat-lbl { font-size: 0.62rem; line-height: 1.1; }
           .gd-stat-trend { font-size: 0.58rem; justify-content: center; }
           .gd-section { padding: 0 16px; }
-          .gd-trust-strip { padding: 0 16px; }
-          .gd-hero-stats-wrap { padding: 0 16px; margin-top: 24px; }
-          .gd-trust-grid { grid-template-columns: repeat(2, 1fr); }
+          .gd-trust-strip { padding: 0 16px; margin-top: 12px; }
+          .gd-hero-stats-wrap { padding: 0 16px; margin-top: 16px; }
+          .gd-trust-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
           .gd-quick-grid { grid-template-columns: repeat(2, 1fr); }
           .gd-hero-dots { display: none; }
           .gd-trust-row { gap: 16px; }
@@ -1406,8 +1406,8 @@ export default function GuestHome() {
           .gd-search-label { font-size: 12px; }
           .gd-search-meta { display: none; }
           .gd-grid { grid-template-columns: 1fr; }
-          .gd-trust-grid { grid-template-columns: repeat(2, 1fr); }
-          .gd-hero-stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+          .gd-trust-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+          .gd-hero-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
           .gd-offer { width: 270px; }
           .gd-dest { width: 150px; }
           .gd-dest-img-wrap { width: 150px; height: 100px; }

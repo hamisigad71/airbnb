@@ -20,11 +20,25 @@ export function Header({ title }: { title?: string }) {
     .slice(0, 2);
   const userRole = (session?.user as any)?.role || 'guest';
 
-  const navLinks = [
+  const isHostView = pathname.startsWith('/host');
+
+  const guestLinks = [
     { href: '/guest', label: 'Explore', icon: '🏠' },
+    { href: '/guest/listings', label: 'Stays', icon: '🛌' },
     { href: '/guest/bookings', label: 'Bookings', icon: '📋' },
-    { href: '/guest/profile', label: 'Profile', icon: '👤' },
+    { href: '/guest/messages', label: 'Inbox', icon: '💬' },
+    { href: '/guest/saved', label: 'Saved', icon: '❤️' },
   ];
+
+  const hostLinks = [
+    { href: '/host', label: 'Dashboard', icon: '📊' },
+    { href: '/host/listings', label: 'Listings', icon: '🏠' },
+    { href: '/host/calendar', label: 'Calendar', icon: '📅' },
+    { href: '/host/analytics', label: 'Insights', icon: '📈' },
+    { href: '/host/messages', label: 'Inbox', icon: '💬' },
+  ];
+
+  const navLinks = isHostView ? hostLinks : guestLinks;
 
   const isActive = (href: string) => pathname === href;
 
@@ -80,8 +94,12 @@ export function Header({ title }: { title?: string }) {
           font-family: var(--font-sans), sans-serif;
           font-size: 1.6rem;
           font-weight: 800;
-          color: var(--h-p);
+          color: var(--h-fg);
           letter-spacing: -0.03em;
+        }
+
+        .hdr-logo-text .accent {
+          color: var(--h-p);
         }
 
         /* ── Desktop nav links ── */
@@ -390,7 +408,9 @@ export function Header({ title }: { title?: string }) {
           {/* Logo */}
           <Link href="/guest" className="hdr-logo">
             <LogoBadge size={42} />
-            <span className="hdr-logo-text">StayLux Ke</span>
+            <span className="hdr-logo-text">
+              Stay<span className="accent">Lux</span> Ke
+            </span>
           </Link>
 
           {/* Desktop nav links */}
@@ -458,6 +478,23 @@ export function Header({ title }: { title?: string }) {
                       {link.label}
                     </Link>
                   ))}
+                  <div className="hdr-dropdown-sep" />
+                  <Link
+                    href={isHostView ? '/host/settings' : '/guest/profile'}
+                    className="hdr-dropdown-item"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <span>⚙️</span>
+                    Settings & Profile
+                  </Link>
+                  <Link
+                    href={isHostView ? '/guest' : '/host'}
+                    className="hdr-dropdown-item"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <span>🔄</span>
+                    {isHostView ? 'Switch to Guest' : 'Switch to Hosting'}
+                  </Link>
                   <div className="hdr-dropdown-sep" />
                   <button
                     className="hdr-dropdown-item danger"

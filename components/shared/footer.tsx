@@ -40,8 +40,14 @@ export function Footer() {
           <div>
             <h4 className="sl-footer-col-title">Discover</h4>
             <div className="sl-footer-links">
-              {["Home", "Top Stays", "Categories", "Gift Cards", "Experiences"].map(l => (
-                <Link key={l} href="/auth/login" className="sl-footer-link">
+              {[
+                { l: "Home", h: "/guest" },
+                { l: "Top Stays", h: "/guest/listings" },
+                { l: "Categories", h: "/guest/listings" },
+                { l: "Gift Cards", h: "/guest/gift-cards" },
+                { l: "Experiences", h: "/guest/experiences" }
+              ].map(({ l, h }) => (
+                <Link key={l} href={h} className="sl-footer-link">
                   <ChevronRight className="w-3 h-3" style={{ opacity: 0.4 }} />
                   {l}
                 </Link>

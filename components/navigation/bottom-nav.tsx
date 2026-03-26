@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { 
-  Home, Heart, Briefcase, User, 
-  LayoutDashboard, List, Calendar, MessageSquare, Menu 
+  Home, Heart, Briefcase, User, Search, MapPin,
+  LayoutDashboard, List, Calendar, MessageSquare, Menu, BarChart
 } from 'lucide-react';
 
 /**
@@ -56,19 +56,19 @@ export default function BottomNav() {
   if (isAuthRoute) return null;
 
   const guestItems = [
-    { label: 'Explore', icon: <Home size={22} strokeWidth={2.2} />, href: '/guest' },
-    { label: 'Saved', icon: <Heart size={22} strokeWidth={2.2} />, href: '/guest/saved' },
-    { label: 'Trips', icon: <Briefcase size={22} strokeWidth={2.2} />, href: '/guest/trips' },
-    { label: 'Inbox', icon: <MessageSquare size={22} strokeWidth={2.2} />, href: '/guest/messages' },
+    { label: 'Explore', icon: <Search size={22} strokeWidth={2.2} />, href: '/guest' },
+    { label: 'Wishlists', icon: <Heart size={22} strokeWidth={2.2} />, href: '/guest/saved' },
+    { label: 'Bookings', icon: <Briefcase size={22} strokeWidth={2.2} />, href: '/guest/bookings' },
+    { label: 'Messages', icon: <MessageSquare size={22} strokeWidth={2.2} />, href: '/guest/messages' },
     { label: 'Profile', icon: <User size={22} strokeWidth={2.2} />, href: '/guest/profile' },
   ];
 
   const hostItems = [
     { label: 'Dashboard', icon: <LayoutDashboard size={22} strokeWidth={2.2} />, href: '/host' },
     { label: 'Listings', icon: <List size={22} strokeWidth={2.2} />, href: '/host/listings' },
-    { label: 'Bookings', icon: <Calendar size={22} strokeWidth={2.2} />, href: '/host/bookings' },
-    { label: 'Messages', icon: <MessageSquare size={22} strokeWidth={2.2} />, href: '/host/messages' },
-    { label: 'Account', icon: <Menu size={22} strokeWidth={2.2} />, href: '/host/settings' },
+    { label: 'Calendar', icon: <Calendar size={22} strokeWidth={2.2} />, href: '/host/calendar' },
+    { label: 'Insights', icon: <BarChart size={22} strokeWidth={2.2} />, href: '/host/analytics' },
+    { label: 'Inbox', icon: <MessageSquare size={22} strokeWidth={2.2} />, href: '/host/messages' },
   ];
 
   const items = isHostView ? hostItems : guestItems;

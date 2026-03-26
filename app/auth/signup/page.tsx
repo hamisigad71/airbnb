@@ -195,6 +195,10 @@ export default function SignupPage() {
           letter-spacing: 0.02em;
         }
 
+        .panel-logo-text .accent {
+          color: var(--primary);
+        }
+
         .panel-main {
           z-index: 1;
         }
@@ -731,7 +735,9 @@ export default function SignupPage() {
 
           <div className="panel-logo">
             <LogoBadge size={38} />
-            <span className="panel-logo-text">StayLux Ke</span>
+            <span className="panel-logo-text">
+              Stay<span className="accent">Lux</span> Ke
+            </span>
           </div>
 
           <div className="panel-main">

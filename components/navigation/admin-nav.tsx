@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Users, FileText, Calendar, BarChart3, AlertCircle } from 'lucide-react';
+import { Home, Users, FileText, Calendar, BarChart, AlertCircle } from 'lucide-react';
 
 export function AdminNav() {
   const pathname = usePathname();
@@ -12,7 +12,7 @@ export function AdminNav() {
     { href: '/admin/users', label: 'Users', icon: Users },
     { href: '/admin/listings', label: 'Listings', icon: FileText },
     { href: '/admin/bookings', label: 'Bookings', icon: Calendar },
-    { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+    { href: '/admin/analytics', label: 'Analytics', icon: BarChart },
     { href: '/admin/reports', label: 'Reports', icon: AlertCircle },
   ];
 

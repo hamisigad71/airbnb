@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, FileText, Calendar, BarChart3, Settings } from 'lucide-react';
+import { Home, FileText, Calendar, BarChart, Settings } from 'lucide-react';
 
 export function HostNav() {
   const pathname = usePathname();
@@ -11,7 +11,7 @@ export function HostNav() {
     { href: '/host', label: 'Dashboard', icon: Home },
     { href: '/host/listings', label: 'Listings', icon: FileText },
     { href: '/host/bookings', label: 'Bookings', icon: Calendar },
-    { href: '/host/earnings', label: 'Earnings', icon: BarChart3 },
+    { href: '/host/earnings', label: 'Earnings', icon: BarChart },
     { href: '/host/settings', label: 'Settings', icon: Settings },
   ];
 
