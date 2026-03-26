@@ -45,9 +45,9 @@ const TRUST_BADGES = [
 ];
 
 const HERO_IMAGES = [
-  'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1800&q=85',
-  'https://images.unsplash.com/photo-1501117912-d7ab9fb5ae1e?w=1800&q=85',
-  'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1800&q=85',
+  'https://i.pinimg.com/736x/a1/ad/97/a1ad97cd3d60dabec8987f6045af7d90.jpg',
+  'https://i.pinimg.com/736x/95/06/8d/95068d6b4d5d66f61b05c7d3dba53944.jpg',
+  'https://i.pinimg.com/736x/04/19/e0/0419e0b0c7338eae338704ed9cb78d4b.jpg',
 ];
 
 export default function GuestHome() {
@@ -72,6 +72,7 @@ export default function GuestHome() {
   }, []);
 
   const userName        = session?.user?.name?.split(' ')[0] || 'Traveller';
+  const userCountry     = session?.user?.country || '';
   const upcomingBookings = MOCK_BOOKINGS.filter(b => b.status === 'confirmed').length;
   const topRated        = [...MOCK_LISTINGS].sort((a, b) => b.rating - a.rating)[0];
 
@@ -87,9 +88,12 @@ export default function GuestHome() {
 
   const filteredListings = MOCK_LISTINGS.filter(l => {
     const matchSearch = !searchQuery
-      || l.title.toLowerCase().includes(searchQuery.toLowerCase())
-      || l.city.toLowerCase().includes(searchQuery.toLowerCase())
-      || l.location.toLowerCase().includes(searchQuery.toLowerCase());
+      ? (userCountry === '' || l.country === userCountry) // Filter by country if no search query
+      : l.title.toLowerCase().includes(searchQuery.toLowerCase())
+        || l.city.toLowerCase().includes(searchQuery.toLowerCase())
+        || l.location.toLowerCase().includes(searchQuery.toLowerCase())
+        || l.country.toLowerCase().includes(searchQuery.toLowerCase());
+    
     const matchCat = activeCategory === 'all' || l.type === activeCategory;
     return matchSearch && matchCat;
   });
@@ -167,238 +171,327 @@ export default function GuestHome() {
         .gd-hero {
           position: relative;
           width: 100%;
-          min-height: 620px;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
+          min-height: clamp(580px, 100vh, 780px);
           overflow: hidden;
+          background: #0a0504;
         }
 
-        /* Crossfading background images */
-        .gd-hero-bg {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-        }
+        /* ── Crossfading background images ── */
         .gd-hero-bg-img {
-          position: absolute;
-          inset: 0;
+          position: absolute; inset: 0;
           width: 100%; height: 100%;
           object-fit: cover;
-          animation: gdHeroCross 6s ease-in-out both;
-          transform-origin: center;
-        }
-
-        /* Multi-layer gradient overlay */
-        .gd-hero-overlay {
-          position: absolute;
-          inset: 0;
-          background:
-            linear-gradient(to top, oklch(0.06 0.001 0 / 0.92) 0%, oklch(0.06 0.001 0 / 0.55) 40%, oklch(0.06 0.001 0 / 0.2) 70%, transparent 100%),
-            linear-gradient(to right, oklch(0.06 0.001 0 / 0.45) 0%, transparent 55%);
-          z-index: 1;
-        }
-
-        /* Decorative blobs behind content */
-        .gd-hero-blob {
-          position: absolute;
+          opacity: 0;
+          transform: scale(1.08);
+          transition: opacity 1.5s cubic-bezier(0.4,0,0.2,1), transform 9s ease-in-out;
           pointer-events: none;
-          animation: gdBlob 20s ease-in-out infinite;
-          z-index: 1;
         }
-        .gd-hero-blob-1 {
-          width: 500px; height: 500px;
-          background: radial-gradient(circle, oklch(0.4 0.155 11.87 / 0.18) 0%, transparent 65%);
-          top: -180px; right: -80px;
-        }
-        .gd-hero-blob-2 {
-          width: 300px; height: 300px;
-          background: radial-gradient(circle, oklch(0.55 0.18 30 / 0.12) 0%, transparent 65%);
-          bottom: 120px; left: 5%;
-          animation-delay: -8s;
+        .gd-hero-bg-img.active {
+          opacity: 1;
+          transform: scale(1.0);
         }
 
-        /* Hero dot indicators */
+        /* Multi-layer overlays */
+        .gd-hero-overlay-btm {
+          position: absolute; inset: 0; z-index: 2; pointer-events: none;
+          background: linear-gradient(
+            to top,
+            oklch(0.05 0.01 11.87 / 0.97) 0%,
+            oklch(0.05 0.01 11.87 / 0.70) 28%,
+            oklch(0.05 0.01 11.87 / 0.22) 58%,
+            transparent 100%
+          );
+        }
+        .gd-hero-overlay-side {
+          position: absolute; inset: 0; z-index: 2; pointer-events: none;
+          background: linear-gradient(
+            to right,
+            oklch(0.05 0.01 11.87 / 0.72) 0%,
+            transparent 52%
+          );
+        }
+        .gd-hero-grain {
+          position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0.03;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ── Slide progress bar ── */
+        .gd-hero-progress {
+          position: absolute; top: 0; left: 0; right: 0;
+          height: 2px; z-index: 20; display: flex; gap: 3px;
+        }
+        .gd-prog-seg {
+          flex: 1; height: 100%;
+          background: rgba(255,255,255,0.2); overflow: hidden;
+        }
+        .gd-prog-fill {
+          height: 100%; background: #fff;
+          width: 0; border-radius: 2px;
+        }
+        .gd-prog-seg.done .gd-prog-fill { width: 100%; }
+        .gd-prog-seg.active .gd-prog-fill {
+          animation: gdProgFill 6s linear forwards;
+        }
+        @keyframes gdProgFill { from{width:0%} to{width:100%} }
+
+        /* ── Slide counter ── */
+        .gd-hero-counter {
+          position: absolute; top: 22px; right: 22px; z-index: 20;
+          display: flex; align-items: center; gap: 6px;
+          font-size: 11px; font-weight: 500;
+          color: rgba(255,255,255,0.5); letter-spacing: 0.1em;
+        }
+        .gd-hero-counter-cur {
+          color: #fff; font-weight: 700; font-size: 13px;
+        }
+
+        /* ── Floating glassmorphic location chips ── */
+        .gd-hero-chip {
+          position: absolute;
+          display: flex; align-items: center; gap: 7px;
+          padding: 7px 14px; border-radius: 100px;
+          background: rgba(255,255,255,0.11);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          border: 1px solid rgba(255,255,255,0.2);
+          color: #fff; font-size: 11px; font-weight: 500;
+          pointer-events: none; z-index: 10; white-space: nowrap;
+        }
+
+        .gd-chip-dot {
+          width: 6px; height: 6px; border-radius: 50%;
+          background: var(--p); flex-shrink: 0;
+          box-shadow: 0 0 8px oklch(0.6 0.155 11.87 / 0.8);
+          animation: gdChipPulse 2s ease-in-out infinite;
+        }
+        @keyframes gdChipPulse {
+          0%,100% { transform:scale(1); opacity:1; }
+          50%      { transform:scale(1.4); opacity:.55; }
+        }
+
+        .gd-chip-1 { top: 22%; right: 7%;  animation: gdDrift1 5.2s ease-in-out infinite; }
+        .gd-chip-2 { top: 46%; right: 19%; animation: gdDrift2 6.8s ease-in-out infinite 1.1s; }
+        .gd-chip-3 { top: 14%; right: 25%; animation: gdDrift3 7.5s ease-in-out infinite 2.3s; }
+
+        @keyframes gdDrift1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        @keyframes gdDrift2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)}  }
+        @keyframes gdDrift3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+        @media (max-width: 640px) { .gd-hero-chip { display: none; } }
+
+        /* ── Review badge ── */
+        .gd-hero-review {
+          position: absolute; z-index: 10;
+          bottom: 240px; right: 5%;
+          display: flex; align-items: center; gap: 10px;
+          padding: 12px 16px; border-radius: 16px;
+          background: rgba(255,255,255,0.1);
+          backdrop-filter: blur(22px);
+          -webkit-backdrop-filter: blur(22px);
+          border: 1px solid rgba(255,255,255,0.2);
+          color: #fff;
+          animation: gdDrift2 7s ease-in-out infinite 0.8s;
+        }
+        .gd-review-stars { display: flex; gap: 3px; color: oklch(0.82 0.16 55); }
+        .gd-review-title { font-size: 12px; font-weight: 600; }
+        .gd-review-sub   { font-size: 10px; opacity: 0.65; margin-top: 2px; }
+
+        @media (max-width: 640px) { .gd-hero-review { display: none; } }
+
+        /* ── Slide dots ── */
         .gd-hero-dots {
           position: absolute;
-          bottom: 300px;
-          right: 32px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          z-index: 4;
+          z-index: 20;
+          bottom: 228px; left: 50%;
+          transform: translateX(-50%);
+          display: flex; gap: 6px;
         }
+        @media (max-width: 640px) { .gd-hero-dots { display: none; } }
+
         .gd-hero-dot {
-          width: 6px; height: 6px;
-          border-radius: 50%;
-          background: rgba(255,255,255,0.35);
-          transition: all 0.4s;
-          cursor: pointer;
-          border: none;
-          padding: 0;
+          width: 7px; height: 7px; border-radius: 50%;
+          background: rgba(255,255,255,0.3);
+          border: none; padding: 0; cursor: pointer;
+          transition: all 0.3s ease;
         }
         .gd-hero-dot.active {
-          height: 24px;
-          border-radius: 3px;
-          background: var(--card);
+          width: 28px; border-radius: 3px;
+          background: #fff;
         }
 
-        /* Hero content */
+        /* ── Text over image ── */
         .gd-hero-content {
-          position: relative;
-          z-index: 3;
-          padding: 0 40px 48px;
-          max-width: 1400px;
-          width: 100%;
-          margin: 0 auto;
-        }
-
-        .gd-hero-eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 6px 14px;
-          border-radius: 100px;
-          background: oklch(0.4 0.155 11.87 / 0.85);
-          backdrop-filter: blur(8px);
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: #fff;
-          margin-bottom: 18px;
-        }
-
-        .gd-hero-ping {
-          width: 8px; height: 8px;
-          border-radius: 50%;
-          background: #fff;
-          position: relative;
-        }
-        .gd-hero-ping::after {
-          content: '';
           position: absolute;
-          inset: 0;
-          border-radius: 50%;
-          background: #fff;
-          animation: gdPing 1.5s ease-out infinite;
+          bottom: 226px; left: 0; right: 0;
+          z-index: 10; padding: 0 36px;
+          max-width: 680px;
+        }
+        @media (max-width: 640px) {
+          .gd-hero-content { left: 0; right: 0; padding: 0 20px; bottom: 210px; }
+        }
+
+        /* Eyebrow */
+        .gd-hero-eyebrow {
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 5px 13px; border-radius: 100px;
+          background: oklch(0.4 0.155 11.87 / 0.88);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255,255,255,0.2);
+          color: #fff; font-size: 11px; font-weight: 700;
+          letter-spacing: 0.09em; text-transform: uppercase;
+          margin-bottom: 16px;
+          animation: gdHeroSlideUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+        }
+        .gd-eyebrow-dot {
+          width: 5px; height: 5px; border-radius: 50%;
+          background: #fff; flex-shrink: 0;
+          animation: gdChipPulse 1.8s ease-in-out infinite;
         }
 
         .gd-hero-title {
-          font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-          font-weight: 800;
-          color: #fff;
-          line-height: 1.05;
-          letter-spacing: -0.03em;
-          margin-bottom: 16px;
-          max-width: 680px;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(2.6rem, 6vw, 4.6rem);
+          font-weight: 400; color: #fff;
+          line-height: 1.08; letter-spacing: -0.02em;
+          margin-bottom: 14px;
+          text-shadow: 0 2px 28px rgba(0,0,0,0.32);
+          animation: gdHeroSlideUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.2s both;
         }
         .gd-hero-title em {
-          font-style: normal;
-          background: linear-gradient(135deg, oklch(0.85 0.08 55), oklch(0.78 0.12 30));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          font-style: italic;
+          color: oklch(0.7 0.18 11.87);
         }
 
         .gd-hero-sub {
-          font-size: 1.05rem;
-          color: rgba(255,255,255,0.72);
-          max-width: 480px;
-          line-height: 1.65;
-          margin-bottom: 36px;
-          font-weight: 400;
+          font-size: 14px; font-weight: 300;
+          color: rgba(255,255,255,0.68); line-height: 1.75;
+          max-width: 430px;
+          animation: gdHeroSlideUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.3s both;
         }
 
-        /* ── Unified search bar ── */
-        .gd-hero-search {
-          display: flex;
-          align-items: center;
+        @keyframes gdHeroSlideUp {
+          from { opacity:0; transform:translateY(22px); }
+          to   { opacity:1; transform:translateY(0); }
+        }
+
+        /* ══════════════════════════════════════════
+           SEARCH PULL-UP CARD
+        ══════════════════════════════════════════ */
+        .gd-hero-search-wrap {
+          position: absolute;
+          bottom: 0; left: 0; right: 0; z-index: 20;
+          padding: 0 20px;
+          animation: gdHeroSlideUp 0.75s cubic-bezier(0.22,1,0.36,1) 0.4s both;
+        }
+        @media (min-width: 768px) { .gd-hero-search-wrap { padding: 0 32px; } }
+
+        .gd-search-card {
           background: var(--card);
-          border-radius: 20px;
-          overflow: hidden;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.15);
-          max-width: 740px;
-          height: 72px;
+          border-radius: 24px 24px 0 0;
+          padding: 22px 24px 18px;
+          box-shadow: 0 -10px 48px oklch(0 0 0 / 0.18);
+          border: 1px solid var(--border);
+          border-bottom: none;
+        }
+        @media (min-width: 768px) { .gd-search-card { padding: 26px 30px 20px; } }
+        @media (max-width: 640px) { .gd-search-card { padding: 16px 16px 14px; border-radius: 20px 20px 0 0; } }
+
+        .gd-search-label-row {
+          display: flex; align-items: center;
+          justify-content: space-between;
+          margin-bottom: 16px; gap: 12px; flex-wrap: wrap;
         }
 
-        .gd-hs-field {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 0 22px;
-          flex: 1;
-          min-width: 0;
-          height: 100%;
-          border-right: 1px solid oklch(0.92 0.002 0);
-          cursor: text;
+        .gd-search-label {
+          font-size: 13px; font-weight: 700;
+          color: var(--fg); letter-spacing: -0.01em;
         }
-        .gd-hs-field:last-of-type { border-right: none; }
+        .gd-search-label span { color: var(--p); }
 
-        .gd-hs-icon { color: var(--p); flex-shrink: 0; }
-
-        .gd-hs-inner { display: flex; flex-direction: column; min-width: 0; }
-        .gd-hs-label {
-          font-size: 0.65rem;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: var(--muted);
-          margin-bottom: 2px;
+        .gd-search-meta {
+          display: flex; align-items: center; gap: 12px;
+          font-size: 11px; color: var(--muted);
         }
-        .gd-hs-input {
-          border: none;
-          outline: none;
-          font-size: 0.88rem;
-          font-weight: 500;
-          color: var(--fg);
-          font-family: inherit;
-          background: transparent;
+        .gd-search-meta-item { display: flex; align-items: center; gap: 4px; }
+
+        /* ── Search fields grid ── */
+        .gd-search-fields {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+        @media (min-width: 600px) {
+          .gd-search-fields {
+            grid-template-columns: 1.6fr 1fr 1fr auto;
+            align-items: stretch;
+          }
+        }
+
+        .gd-sf {
+          display: flex; align-items: center; gap: 10px;
+          padding: 12px 14px;
+          border-radius: 13px;
+          border: 1.5px solid var(--border);
+          background: var(--bg);
+          transition: all 0.22s; cursor: pointer;
+        }
+        .gd-sf:focus-within {
+          border-color: var(--p);
+          box-shadow: 0 0 0 3px var(--p-ring);
+          background: var(--card);
+        }
+
+        .gd-sf-icon {
+          color: var(--p); flex-shrink: 0;
+          width: 15px; height: 15px;
+        }
+
+        .gd-sf-inner {
+          display: flex; flex-direction: column; min-width: 0; flex: 1;
+        }
+        .gd-sf-label {
+          font-size: 9px; font-weight: 700;
+          color: var(--muted); text-transform: uppercase;
+          letter-spacing: 0.09em; margin-bottom: 2px;
+        }
+        .gd-sf-input {
+          background: none; border: none; outline: none;
+          font-size: 12px; font-weight: 500;
+          color: var(--fg); font-family: inherit;
           width: 100%;
         }
-        .gd-hs-input::placeholder { color: var(--subtle); font-weight: 400; }
+        .gd-sf-input::placeholder { color: var(--subtle); font-weight: 400; }
 
-        .gd-hs-btn {
-          margin: 8px;
-          padding: 0 28px;
-          height: calc(100% - 16px);
-          border-radius: 14px;
-          background: var(--p);
-          color: #fff;
-          border: none;
-          font-size: 0.9rem;
-          font-weight: 600;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          white-space: nowrap;
-          transition: all 0.25s;
-          font-family: inherit;
-          flex-shrink: 0;
+        .gd-search-submit {
+          display: flex; align-items: center; justify-content: center; gap: 7px;
+          padding: 12px 24px; border-radius: 13px;
+          background: var(--p); color: #fff;
+          font-size: 13px; font-weight: 700;
+          font-family: inherit; border: none; cursor: pointer;
+          transition: all 0.22s; white-space: nowrap;
         }
-        .gd-hs-btn:hover {
-          background: var(--p-hover);
-          transform: scale(1.02);
-          box-shadow: 0 4px 16px var(--p-shadow);
+        .gd-search-submit:hover {
+          filter: brightness(1.08);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px oklch(0.4 0.155 11.87 / 0.32);
         }
+        .gd-search-submit:active { transform: scale(0.97); }
 
-        /* Trust badges row */
+        /* ── Trust micro-row ── */
         .gd-trust-row {
-          display: flex;
-          align-items: center;
-          gap: 24px;
-          margin-top: 24px;
-          flex-wrap: wrap;
+          display: flex; align-items: center;
+          gap: 16px; margin-top: 14px; flex-wrap: wrap;
         }
         .gd-trust-item {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          color: rgba(255,255,255,0.75);
-          font-size: 0.8rem;
+          display: flex; align-items: center; gap: 6px;
+          font-size: 11px; color: var(--muted); font-weight: 500;
         }
-        .gd-trust-item svg { color: rgba(255,255,255,0.5); }
+        .gd-trust-check {
+          width: 14px; height: 14px; border-radius: 50%;
+          background: var(--p);
+          display: flex; align-items: center; justify-content: center;
+          flex-shrink: 0;
+        }
 
         /* ─ Stat cards — float over bottom of hero ─ */
         .gd-hero-stats-wrap {
@@ -445,9 +538,9 @@ export default function GuestHome() {
         .gd-stat-icon {
           width: 52px; height: 52px;
           border-radius: 16px;
-          background: var(--p-pale);
+          background: oklch(0.95 0.04 11.87); /* Soft pinkish-red */
           display: flex; align-items: center; justify-content: center;
-          font-size: 1.5rem;
+          color: var(--p);
           flex-shrink: 0;
           transition: transform 0.3s;
           position: relative;
@@ -456,7 +549,7 @@ export default function GuestHome() {
 
         .gd-stat-val { font-size: 1.7rem; font-weight: 700; color: var(--fg); line-height: 1; animation: gdCount 0.6s ease both; }
         .gd-stat-lbl { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
-        .gd-stat-trend { font-size: 0.72rem; color: oklch(0.45 0.14 145); font-weight: 600; margin-top: 2px; display: flex; align-items: center; gap: 3px; }
+        .gd-stat-trend { font-size: 0.72rem; color: oklch(0.55 0.18 145); font-weight: 700; margin-top: 2px; display: flex; align-items: center; gap: 3px; }
 
         /* ═══════════════════════════════════════
            SECTION SHARED
@@ -1271,13 +1364,22 @@ export default function GuestHome() {
           .gd-support { grid-template-columns: 1fr; padding: 36px 28px; gap: 28px; }
         }
         @media (max-width: 768px) {
-          .gd-hero { min-height: 560px; }
-          .gd-hero-content { padding: 0 20px 40px; }
+          .gd-hero { min-height: 780px; }
+          .gd-hero-content { padding: 0 20px 40px; bottom: 360px !important; }
+          .gd-hero-search-wrap { bottom: 84px !important; }
           .gd-hero-search { flex-direction: column; align-items: stretch; height: auto; border-radius: 20px; padding: 12px; gap: 10px; }
+          .gd-search-fields { grid-template-columns: 1fr 1fr; }
+          .gd-sf:first-child { grid-column: span 2; }
+          .gd-search-submit { grid-column: span 2; }
           .gd-hs-field { width: 100%; height: 60px; border-right: none; border-bottom: 1px solid oklch(0.92 0.002 0); border-radius: 12px; background: oklch(0.975 0.001 0); padding: 0 18px; }
           .gd-hs-field:last-of-type { border-bottom: none; }
           .gd-hs-btn { width: 100%; height: 54px; border-radius: 12px; justify-content: center; margin: 4px 0 0; }
-          .gd-hero-stats { grid-template-columns: 1fr; }
+          .gd-hero-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; transform: translateY(-44px); }
+          .gd-stat { padding: 12px 8px; flex-direction: column; text-align: center; gap: 8px; min-height: 110px; justify-content: center; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); }
+          .gd-stat-icon { width: 32px; height: 32px; border-radius: 10px; }
+          .gd-stat-val { font-size: 1.1rem; }
+          .gd-stat-lbl { font-size: 0.62rem; line-height: 1.1; }
+          .gd-stat-trend { font-size: 0.58rem; justify-content: center; }
           .gd-section { padding: 0 16px; }
           .gd-trust-strip { padding: 0 16px; }
           .gd-hero-stats-wrap { padding: 0 16px; }
@@ -1291,10 +1393,14 @@ export default function GuestHome() {
           .gd-support-stats { gap: 20px; flex-wrap: wrap; }
         }
         @media (max-width: 640px) {
-          .gd-hero-title { font-size: 2.2rem; }
+          .gd-hero-title { font-size: 1.8rem; line-height: 1.15; }
+          .gd-hero-sub { font-size: 12px; line-height: 1.6; }
+          .gd-hero-content { bottom: 420px !important; }
+          .gd-search-label { font-size: 12px; }
+          .gd-search-meta { display: none; }
           .gd-grid { grid-template-columns: 1fr; }
           .gd-trust-grid { grid-template-columns: repeat(2, 1fr); }
-          .gd-hero-stats { grid-template-columns: 1fr; }
+          .gd-hero-stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
           .gd-offer { width: 270px; }
           .gd-dest { width: 150px; }
           .gd-dest-img-wrap { width: 150px; height: 100px; }
@@ -1408,105 +1514,186 @@ export default function GuestHome() {
             CINEMATIC HERO
         ══════════════════════════════════ */}
         <section className="gd-hero">
-          {/* Crossfading background */}
-          <div className="gd-hero-bg">
-            {HERO_IMAGES.map((src, i) => (
-              i === heroImg && (
-                <img key={i} src={src} alt="" className="gd-hero-bg-img" />
-              )
+
+          {/* Progress bar */}
+          <div className="gd-hero-progress">
+            {HERO_IMAGES.map((_, i) => (
+              <div
+                key={i}
+                className={`gd-prog-seg ${i < heroImg ? 'done' : i === heroImg ? 'active' : ''}`}
+              >
+                <div className="gd-prog-fill" />
+              </div>
             ))}
           </div>
 
-          <div className="gd-hero-overlay" />
-          <div className="gd-hero-blob gd-hero-blob-1" />
-          <div className="gd-hero-blob gd-hero-blob-2" />
+          {/* Background images — crossfade on heroImg state */}
+          {HERO_IMAGES.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt=""
+              className={`gd-hero-bg-img ${i === heroImg ? 'active' : ''}`}
+            />
+          ))}
 
-          {/* Slide indicators */}
+          {/* Overlays */}
+          <div className="gd-hero-overlay-btm" />
+          <div className="gd-hero-overlay-side" />
+          <div className="gd-hero-grain" />
+
+          {/* Slide counter */}
+          <div className="gd-hero-counter">
+            <span className="gd-hero-counter-cur">
+              {String(heroImg + 1).padStart(2, '0')}
+            </span>
+            <span style={{ opacity: 0.4 }}>/ {String(HERO_IMAGES.length).padStart(2, '0')}</span>
+          </div>
+
+          {/* Floating location chips */}
+          <div className="gd-hero-chip gd-chip-1">
+            <div className="gd-chip-dot" />
+            Santorini, Greece
+          </div>
+          <div className="gd-hero-chip gd-chip-2">
+            <div className="gd-chip-dot" style={{ animationDelay: '0.6s' }} />
+            Bali, Indonesia
+          </div>
+          <div className="gd-hero-chip gd-chip-3">
+            <div className="gd-chip-dot" style={{ animationDelay: '1.2s' }} />
+            Cape Town, SA
+          </div>
+
+          {/* Review badge */}
+          <div className="gd-hero-review">
+            <div className="gd-review-stars">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={11} fill="currentColor" />
+              ))}
+            </div>
+            <div>
+              <div className="gd-review-title">Exceptional</div>
+              <div className="gd-review-sub">4.9 · 12,400+ reviews</div>
+            </div>
+          </div>
+
+          {/* Slide dot indicators */}
           <div className="gd-hero-dots">
             {HERO_IMAGES.map((_, i) => (
               <button
                 key={i}
                 className={`gd-hero-dot ${i === heroImg ? 'active' : ''}`}
                 onClick={() => setHeroImg(i)}
+                aria-label={`Go to slide ${i + 1}`}
               />
             ))}
           </div>
 
+          {/* Main text content */}
           <div className="gd-hero-content">
-            <div className="gd-hero-eyebrow gd-up">
-              <div className="gd-hero-ping" />
+            <div className="gd-hero-eyebrow">
+              <div className="gd-eyebrow-dot" />
               {upcomingBookings > 0
                 ? `${upcomingBookings} upcoming stay${upcomingBookings > 1 ? 's' : ''}`
                 : 'Start exploring'}
             </div>
 
-            <h1 className="gd-hero-title gd-up gd-d1">
+            <h1 className="gd-hero-title">
               {currentTime},<br />
-              <em>{session?.user?.name?.split(' ')[0] || 'Traveller'}.</em><br />
-              Where next?
+              <em>{userName}.</em><br />
+              {userCountry ? `Exploring ${userCountry}` : 'Where next?'}
             </h1>
 
-            <p className="gd-hero-sub gd-up gd-d2">
-              Hand-picked stays across 190+ countries — from city apartments to wild safari lodges.
-              Book instantly, travel better.
+            <p className="gd-hero-sub">
+              {userCountry
+                ? `Discover the finest stays and hidden gems across ${userCountry}.`
+                : 'Hand-picked stays across 190+ countries — from city apartments to wild safari lodges.'}
+              {' '}Book instantly, travel better.
             </p>
+          </div>
 
-            {/* Unified search bar */}
-            <div className="gd-hero-search gd-up gd-d3">
-              <div className="gd-hs-field">
-                <Search size={16} className="gd-hs-icon" />
-                <div className="gd-hs-inner">
-                  <span className="gd-hs-label">Where</span>
-                  <input
-                    className="gd-hs-input"
-                    placeholder="City, neighbourhood, landmark…"
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
-                  />
+          {/* Search pull-up card */}
+          <div className="gd-hero-search-wrap">
+            <div className="gd-search-card">
+
+              {/* Header row */}
+              <div className="gd-search-label-row">
+                <div className="gd-search-label">
+                  Where do you want to <span>stay?</span>
+                </div>
+                <div className="gd-search-meta">
+                  <span className="gd-search-meta-item">
+                    <MapPin size={11} color="var(--p)" />
+                    6 top destinations
+                  </span>
+                  <span className="gd-search-meta-item">
+                    <Star size={11} color="oklch(0.7 0.18 55)" fill="oklch(0.7 0.18 55)" />
+                    Avg. 4.8 rating
+                  </span>
                 </div>
               </div>
 
-              <div className="gd-hs-field">
-                <Calendar size={16} className="gd-hs-icon" />
-                <div className="gd-hs-inner">
-                  <span className="gd-hs-label">Check-in</span>
-                  <input
-                    className="gd-hs-input"
-                    type="date"
-                    value={searchDate}
-                    onChange={e => setSearchDate(e.target.value)}
-                    placeholder="Add dates"
-                  />
+              {/* Search fields */}
+              <div className="gd-search-fields">
+                <div className="gd-sf">
+                  <Search size={15} className="gd-sf-icon" />
+                  <div className="gd-sf-inner">
+                    <span className="gd-sf-label">Where</span>
+                    <input
+                      className="gd-sf-input"
+                      placeholder="City, neighbourhood, landmark…"
+                      value={searchQuery}
+                      onChange={e => setSearchQuery(e.target.value)}
+                    />
+                  </div>
                 </div>
+
+                <div className="gd-sf">
+                  <Calendar size={15} className="gd-sf-icon" />
+                  <div className="gd-sf-inner">
+                    <span className="gd-sf-label">Check-in</span>
+                    <input
+                      className="gd-sf-input"
+                      type="date"
+                      value={searchDate}
+                      onChange={e => setSearchDate(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="gd-sf">
+                  <Users size={15} className="gd-sf-icon" />
+                  <div className="gd-sf-inner">
+                    <span className="gd-sf-label">Guests</span>
+                    <input
+                      className="gd-sf-input"
+                      placeholder="Add guests"
+                      value={searchGuests}
+                      onChange={e => setSearchGuests(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <button className="gd-search-submit">
+                  <Search size={14} />
+                  Search
+                </button>
               </div>
 
-              <div className="gd-hs-field">
-                <Users size={16} className="gd-hs-icon" />
-                <div className="gd-hs-inner">
-                  <span className="gd-hs-label">Guests</span>
-                  <input
-                    className="gd-hs-input"
-                    placeholder="Add guests"
-                    value={searchGuests}
-                    onChange={e => setSearchGuests(e.target.value)}
-                  />
-                </div>
+              {/* Trust micro-row */}
+              <div className="gd-trust-row">
+                {['No booking fees', 'Free cancellation on most stays', 'Best price guarantee'].map(t => (
+                  <div className="gd-trust-item" key={t}>
+                    <div className="gd-trust-check">
+                      <svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="2 6 5 9 10 3" />
+                      </svg>
+                    </div>
+                    {t}
+                  </div>
+                ))}
               </div>
 
-              <button className="gd-hs-btn">
-                <Search size={15} />
-                Search
-              </button>
-            </div>
-
-            {/* Trust micro-text */}
-            <div className="gd-trust-row gd-up gd-d4">
-              {['No booking fees', 'Free cancellation on most stays', 'Best price guarantee'].map(t => (
-                <div className="gd-trust-item" key={t}>
-                  <ShieldCheck size={13} />
-                  {t}
-                </div>
-              ))}
             </div>
           </div>
         </section>
@@ -1517,7 +1704,9 @@ export default function GuestHome() {
         <div className="gd-hero-stats-wrap">
           <div className="gd-hero-stats">
             <Link href="/guest/bookings" className="gd-stat gd-up gd-d2">
-              <div className="gd-stat-icon">📋</div>
+              <div className="gd-stat-icon">
+                <FileText size={24} />
+              </div>
               <div>
                 <div className="gd-stat-val">{upcomingBookings}</div>
                 <div className="gd-stat-lbl">Upcoming Bookings</div>
@@ -1525,14 +1714,18 @@ export default function GuestHome() {
               </div>
             </Link>
             <div className="gd-stat gd-up gd-d3">
-              <div className="gd-stat-icon">❤️</div>
+              <div className="gd-stat-icon">
+                <Heart size={24} fill="currentColor" />
+              </div>
               <div>
                 <div className="gd-stat-val">{liked.size}</div>
                 <div className="gd-stat-lbl">Saved Stays</div>
               </div>
             </div>
             <div className="gd-stat gd-up gd-d4">
-              <div className="gd-stat-icon">🌍</div>
+              <div className="gd-stat-icon">
+                <Globe size={24} />
+              </div>
               <div>
                 <div className="gd-stat-val">{MOCK_LISTINGS.length}</div>
                 <div className="gd-stat-lbl">Available Now</div>
@@ -1693,8 +1886,8 @@ export default function GuestHome() {
         <div className="gd-section gd-up gd-d7" style={{ marginTop: 48 }}>
           <div className="gd-hdr">
             <div className="gd-hdr-left">
-              <div className="gd-hdr-icon"><Search size={16} /></div>
-              <h2 className="gd-ttl">Browse Stays</h2>
+              <div className="gd-hdr-icon"><Sparkles size={18}/></div>
+              <h2 className="gd-ttl"> {userCountry ? `Top Stays in ${userCountry}` : 'Top Recommended Stays'}</h2>
             </div>
           </div>
 
@@ -1795,10 +1988,12 @@ export default function GuestHome() {
                 <Headphones size={12} />
                 24/7 Customer Support
               </div>
-              <h2 className="gd-support-title">
-                Need help?<br />
-                We&apos;re <em>always here</em>.
-              </h2>
+              <h1 className="gd-hero-title gd-up gd-d2">
+                Find your <em>next home</em> {userCountry ? `in ${userCountry}` : 'anywhere'}.
+              </h1>
+              <p className="gd-hero-sub gd-up gd-d3">
+                Discover {userCountry ? `the best stays in ${userCountry}` : 'extraordinary properties'} for your next trip, from modern city lofts to secluded beach villas.
+              </p>
               <p className="gd-support-desc">
                 Our dedicated support team is available around the clock to help
                 with bookings, cancellations, property issues, and anything else

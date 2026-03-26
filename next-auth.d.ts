@@ -9,11 +9,13 @@ declare module "next-auth" {
       /** The user's role. */
       id: string
       role: string
+      country?: string
     } & DefaultSession["user"]
   }
 
   interface User {
     role: string
+    country?: string
   }
 }
 
@@ -23,5 +25,6 @@ declare module "next-auth/jwt" {
     /** OpenID ID Token */
     id: string
     role: string
+    country?: string
   }
 }

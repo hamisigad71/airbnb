@@ -13,12 +13,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
         role: { label: 'Role', type: 'text' },
+        country: { label: 'Country', type: 'text' },
       },
       async authorize(credentials) {
         // DEMO MODE: Accept any email/password combination
         const email = credentials?.email as string;
         const password = credentials?.password as string;
         const requestedRole = (credentials?.role as string) || 'guest';
+        const requestedCountry = credentials?.country as string;
 
         if (!email || !password) return null;
 
@@ -31,6 +33,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             email: mockUser.email,
             name: mockUser.name,
             role: mockUser.role,
+            country: requestedCountry || mockUser.country,
           };
         }
 
@@ -41,6 +44,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           email,
           name,
           role: requestedRole,
+          country: requestedCountry,
         };
       },
     }),
@@ -54,6 +58,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user) {
         token.id = user.id as string;
         token.role = user.role;
+        token.country = user.country;
       }
       return token;
     },
@@ -61,6 +66,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (session.user) {
         session.user.id = token.id as string;
         session.user.role = token.role as string;
+        session.user.country = token.country as string;
       }
       return session;
     },

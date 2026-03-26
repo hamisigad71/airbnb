@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AlertCircle, Eye, EyeOff, ArrowRight, Star, Zap, Check } from "lucide-react";
 import LogoBadge from "@/components/shared/logo-badge";
+import { LocationSelector } from "@/components/auth/location-selector";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [role, setRole] = useState<"guest" | "host" | "admin">("guest");
+  const [country, setCountry] = useState("Kenya");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +28,7 @@ export default function LoginPage() {
         email,
         password,
         role,
+        country,
         redirect: false,
       });
       if (result?.error) {
@@ -52,6 +55,7 @@ export default function LoginPage() {
         email: quickEmail,
         password: "password",
         role,
+        country: "Kenya", // Default for quick login
         redirect: false,
       });
       if (result?.ok) {
@@ -958,10 +962,24 @@ export default function LoginPage() {
               </div>
  
               <button className="submit-btn" type="submit" disabled={loading}>
-                {loading ? "Signing in…" : "Sign In"}
-                {!loading && <ArrowRight size={16} />}
-              </button>
+          {loading ? (
+            <span className="flex items-center gap-2">
+              <span className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+              Signing in...
+            </span>
+          ) : (
+            <>
+              Sign in <ArrowRight size={18} />
+            </>
+          )}
+        </button>
             </form>
+
+            <LocationSelector 
+              onValueChange={setCountry} 
+              defaultValue={country}
+              className="mb-6"
+            />
 
             {/* Demo quick-login */}
             <div className="demo-section">

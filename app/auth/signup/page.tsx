@@ -19,6 +19,7 @@ import {
   Star,
 } from "lucide-react";
 import LogoBadge from "@/components/shared/logo-badge";
+import { LocationSelector } from "@/components/auth/location-selector";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -33,6 +34,7 @@ export default function SignupPage() {
     role: "guest" as "guest" | "host",
     agreeToTerms: false,
     subscribeNewsletter: false,
+    country: "Kenya",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -96,6 +98,7 @@ export default function SignupPage() {
         email: formData.email,
         password: formData.password,
         role: formData.role,
+        country: formData.country,
         redirect: false,
       });
 
@@ -937,13 +940,20 @@ export default function SignupPage() {
                   </div>
                 </div>
 
-                <button
-                  className="submit-btn"
-                  type="button"
-                  onClick={handleNextStep}
-                >
-                  Continue <ArrowRight size={16} />
-                </button>
+                  <LocationSelector 
+                    onValueChange={(v) => setFormData(prev => ({ ...prev, country: v }))}
+                    defaultValue={formData.country}
+                    className="mt-4"
+                  />
+
+                  <button
+                    className="submit-btn"
+                    type="button"
+                    onClick={handleNextStep}
+                    style={{ marginTop: "1.5rem" }}
+                  >
+                    Continue <ArrowRight size={18} />
+                  </button>
 
                 <p className="signin-link">
                   Already have an account?{" "}

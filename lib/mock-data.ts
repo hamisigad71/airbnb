@@ -7,6 +7,7 @@ export interface User {
   bio?: string;
   phone?: string;
   verified?: boolean;
+  country?: string;
 }
 
 export interface Listing {
@@ -70,6 +71,7 @@ export const MOCK_USERS: User[] = [
     bio: 'Travel enthusiast and adventure seeker',
     phone: '+1 234 567 8900',
     verified: true,
+    country: 'Kenya',
   },
   {
     id: 'user-host-1',
@@ -80,6 +82,7 @@ export const MOCK_USERS: User[] = [
     bio: 'Passionate about hospitality',
     phone: '+1 234 567 8901',
     verified: true,
+    country: 'USA',
   },
   {
     id: 'user-admin-1',
@@ -90,6 +93,7 @@ export const MOCK_USERS: User[] = [
     bio: 'Platform administrator',
     phone: '+1 234 567 8902',
     verified: true,
+    country: 'Egypt',
   },
 ];
 
@@ -478,6 +482,296 @@ export const MOCK_LISTINGS: Listing[] = [
     location: 'Kreuzberg', city: 'Berlin', country: 'Germany',
     lat: 52.498, lng: 13.406, pricePerNight: 85, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
     amenities: ['WiFi', 'Record Player', 'Shared Kitchen'], rating: 4.81, reviews: 78, availability: [], type: 'room'
+  },
+  {
+    id: 'listing-26', hostId: 'user-host-1',
+    title: 'Luxury Beach Resort',
+    description: 'Breathtaking white sand beach, private infinity pool, and world-class service.',
+    image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600&h=400&fit=crop', // Placeholder
+    images: ['https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600&h=400&fit=crop'],
+    location: 'Nungwi Beach', city: 'Zanzibar', country: 'Tanzania',
+    lat: -5.72, lng: 39.29, pricePerNight: 400, maxGuests: 6, bedrooms: 3, beds: 4, bathrooms: 3,
+    amenities: ['Private Pool', 'Beachfront', 'WiFi', 'All Meals'], rating: 4.98, reviews: 24, availability: [], type: 'villa'
+  },
+  {
+    id: 'listing-27', hostId: 'user-host-1',
+    title: 'Serengeti Safari Camp',
+    description: 'Experience the magic of the wild in this luxury tented camp.',
+    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&h=400&fit=crop', // Placeholder
+    images: ['https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&h=400&fit=crop'],
+    location: 'Serengeti Central', city: 'Serengeti', country: 'Tanzania',
+    lat: -2.33, lng: 34.83, pricePerNight: 600, maxGuests: 4, bedrooms: 2, beds: 2, bathrooms: 2,
+    amenities: ['Safari Tours', 'WiFi', 'Fireplace', 'Outdoor Shower'], rating: 4.95, reviews: 12, availability: [], type: 'house'
+  },
+  {
+    id: 'listing-28', hostId: 'user-host-1',
+    title: 'Pyramid View Penthouse',
+    description: 'Stunning views of the Giza Pyramids from your private terrace.',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop', // Placeholder
+    images: ['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop'],
+    location: 'Giza Plateau', city: 'Cairo', country: 'Egypt',
+    lat: 29.97, lng: 31.13, pricePerNight: 250, maxGuests: 4, bedrooms: 2, beds: 2, bathrooms: 2,
+    amenities: ['Pyramid View', 'WiFi', 'Kitchen', 'Air Conditioning'], rating: 4.92, reviews: 85, availability: [], type: 'apartment'
+  },
+  {
+    id: 'listing-29', hostId: 'user-host-1',
+    title: 'Luxor Riverside Retreat',
+    description: 'Relax by the Nile in this tranquil villa with historic charm.',
+    image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&h=400&fit=crop', // Placeholder
+    images: ['https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&h=400&fit=crop'],
+    location: 'West Bank', city: 'Luxor', country: 'Egypt',
+    lat: 25.72, lng: 32.61, pricePerNight: 180, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
+    amenities: ['Nile View', 'WiFi', 'Breakfast', 'Pool Access'], rating: 4.88, reviews: 34, availability: [], type: 'villa'
+  },
+  {
+    id: 'listing-30', hostId: 'user-host-1',
+    title: 'Mykonos Blue Villa',
+    description: 'Traditional white villa with blue shutters and panoramic sea views.',
+    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&h=400&fit=crop', // Placeholder
+    images: ['https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&h=400&fit=crop'],
+    location: 'Aleomandra', city: 'Mykonos', country: 'Greece',
+    lat: 37.42, lng: 25.32, pricePerNight: 700, maxGuests: 8, bedrooms: 4, beds: 5, bathrooms: 4,
+    amenities: ['Infinity Pool', 'WiFi', 'Beach Access', 'Terrace'], rating: 4.96, reviews: 52, availability: [], type: 'villa'
+  },
+  {
+    id: 'listing-31', hostId: 'user-host-1',
+    title: 'Cape Winelands Estate',
+    description: 'Historic manor house surrounded by world-class vineyards.',
+    image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop', // Placeholder
+    images: ['https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop'],
+    location: 'Stellenbosch', city: 'Cape Town', country: 'South Africa',
+    lat: -33.93, lng: 18.86, pricePerNight: 350, maxGuests: 6, bedrooms: 3, beds: 4, bathrooms: 2.5,
+    amenities: ['Vineyard View', 'WiFi', 'Fireplace', 'Wine Cellar'], rating: 4.91, reviews: 41, availability: [], type: 'house'
+  },
+  {
+    id: 'listing-32', hostId: 'user-host-1',
+    title: 'Kenya Coast Beach House',
+    description: 'Stylish beachfront home in Diani with palm-fringed views.',
+    image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&h=400&fit=crop', // Placeholder
+    images: ['https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&h=400&fit=crop'],
+    location: 'Diani Beach', city: 'Kwale', country: 'Kenya',
+    lat: -4.27, lng: 39.59, pricePerNight: 280, maxGuests: 5, bedrooms: 2, beds: 3, bathrooms: 2,
+    amenities: ['Pool', 'WiFi', 'Beach Access', 'Cook Service'], rating: 4.94, reviews: 67, availability: [], type: 'house'
+  },
+  {
+    id: 'listing-33', hostId: 'user-host-1',
+    title: 'Skyline Penthouse in Westlands',
+    description: 'Ultra-modern 3-bedroom penthouse with panoramic city views and a private rooftop garden.',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop'],
+    location: 'Westlands Heights', city: 'Nairobi', country: 'Kenya',
+    lat: -1.26, lng: 36.80, pricePerNight: 220, maxGuests: 6, bedrooms: 3, beds: 4, bathrooms: 3.5,
+    amenities: ['Gym', 'WiFi', 'Pool', 'Parking'], rating: 4.97, reviews: 18, availability: [], type: 'apartment'
+  },
+  {
+    id: 'listing-34', hostId: 'user-host-1',
+    title: 'Quiet Garden Cottage in Karen',
+    description: 'A peaceful retreat nestled in the lush greenery of Karen. Perfect for nature lovers.',
+    image: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600&h=400&fit=crop'],
+    location: 'Karen Blixen Road', city: 'Nairobi', country: 'Kenya',
+    lat: -1.33, lng: 36.71, pricePerNight: 120, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
+    amenities: ['Garden', 'Fireplace', 'WiFi', 'Breakfast'], rating: 4.89, reviews: 42, availability: [], type: 'house'
+  },
+  {
+    id: 'listing-35', hostId: 'user-host-1',
+    title: 'Ocean View Boutique Suite',
+    description: 'Elegant suite with direct Indian Ocean views and a private balcony.',
+    image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&h=400&fit=crop'],
+    location: 'Nyali Beach Front', city: 'Mombasa', country: 'Kenya',
+    lat: -4.03, lng: 39.71, pricePerNight: 95, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
+    amenities: ['WiFi', 'Air Conditioning', 'Beach Access', 'Pool'], rating: 4.82, reviews: 29, availability: [], type: 'room'
+  },
+  {
+    id: 'listing-36', hostId: 'user-host-1',
+    title: 'Swahili Style Beach Villa',
+    description: 'Traditional architecture meets modern luxury in this stunning villa with a private chef.',
+    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&h=400&fit=crop'],
+    location: 'Bamburi Marine Park', city: 'Mombasa', country: 'Kenya',
+    lat: -3.98, lng: 39.72, pricePerNight: 450, maxGuests: 10, bedrooms: 5, beds: 8, bathrooms: 5,
+    amenities: ['Private Pool', 'Chef', 'WiFi', 'Garden'], rating: 4.95, reviews: 15, availability: [], type: 'villa'
+  },
+  {
+    id: 'listing-37', hostId: 'user-host-1',
+    title: 'Lakeview Modern Cabin',
+    description: 'Sleek A-frame cabin overlooking Lake Nakuru. Stunning flamingos and sunset views.',
+    image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=600&h=400&fit=crop'],
+    location: 'Nakuru Ridge', city: 'Nakuru', country: 'Kenya',
+    lat: -0.36, lng: 36.08, pricePerNight: 150, maxGuests: 4, bedrooms: 2, beds: 2, bathrooms: 1.5,
+    amenities: ['Hot Tub', 'WiFi', 'BBQ Grill', 'Fireplace'], rating: 4.91, reviews: 21, availability: [], type: 'house'
+  },
+  {
+    id: 'listing-38', hostId: 'user-host-1',
+    title: 'Geothermal Spa Retreat Villa',
+    description: 'Unique villa experience with a private geothermal heated pool and lake access.',
+    image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600&h=400&fit=crop'],
+    location: 'Moi South Lake Road', city: 'Naivasha', country: 'Kenya',
+    lat: -0.72, lng: 36.43, pricePerNight: 320, maxGuests: 8, bedrooms: 4, beds: 6, bathrooms: 4,
+    amenities: ['Heated Pool', 'WiFi', 'Boat Rental', 'Sauna'], rating: 4.98, reviews: 56, availability: [], type: 'villa'
+  },
+  {
+    id: 'listing-39', hostId: 'user-host-1',
+    title: 'Coastal Dream Resort Apartment',
+    description: 'Bright and airy apartment in a premium resort complex with multiple pools.',
+    image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop'],
+    location: 'Casuarina Road', city: 'Malindi', country: 'Kenya',
+    lat: -3.22, lng: 40.12, pricePerNight: 110, maxGuests: 4, bedrooms: 2, beds: 2, bathrooms: 2,
+    amenities: ['Pool Access', 'WiFi', 'Beach Access', 'Gym'], rating: 4.85, reviews: 37, availability: [], type: 'apartment'
+  },
+  {
+    id: 'listing-40', hostId: 'user-host-1',
+    title: 'Historic Marine Room',
+    description: 'Stay in a beautifully restored room in a historic building overlooking the marine park.',
+    image: 'https://images.unsplash.com/photo-1554995207-c18c20360a59?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1554995207-c18c20360a59?w=600&h=400&fit=crop'],
+    location: 'Old Town Square', city: 'Malindi', country: 'Kenya',
+    lat: -3.21, lng: 40.13, pricePerNight: 65, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
+    amenities: ['WiFi', 'Breakfast', 'Historic Tour', 'Library'], rating: 4.93, reviews: 84, availability: [], type: 'room'
+  },
+  {
+    id: 'listing-41', hostId: 'user-host-1',
+    title: 'Modern Room in Kilimani',
+    description: 'A cozy and stylish room in the heart of Kilimani, close to top restaurants and malls.',
+    image: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=600&h=400&fit=crop'],
+    location: 'Lenana Road', city: 'Nairobi', country: 'Kenya',
+    lat: -1.29, lng: 36.79, pricePerNight: 55, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
+    amenities: ['WiFi', 'Parking', 'Workspace'], rating: 4.87, reviews: 12, availability: [], type: 'room'
+  },
+  {
+    id: 'listing-42', hostId: 'user-host-1',
+    title: 'Luxury Villa in Muthaiga',
+    description: 'Exquisite 6-bedroom villa with a private tennis court and heated swimming pool.',
+    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&h=400&fit=crop'],
+    location: 'Muthaiga Road', city: 'Nairobi', country: 'Kenya',
+    lat: -1.25, lng: 36.83, pricePerNight: 850, maxGuests: 12, bedrooms: 6, beds: 10, bathrooms: 6,
+    amenities: ['Tennis Court', 'Heated Pool', 'WiFi', 'Chef'], rating: 4.99, reviews: 5, availability: [], type: 'villa'
+  },
+  {
+    id: 'listing-43', hostId: 'user-host-1',
+    title: 'Sun-Kissed Nyali Apartment',
+    description: 'Bright 2-bedroom apartment with a shared pool and walking distance to the beach.',
+    image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&h=400&fit=crop'],
+    location: 'Nyali Close', city: 'Mombasa', country: 'Kenya',
+    lat: -4.04, lng: 39.70, pricePerNight: 80, maxGuests: 4, bedrooms: 2, beds: 2, bathrooms: 2,
+    amenities: ['Pool Access', 'WiFi', 'Air Conditioning'], rating: 4.76, reviews: 14, availability: [], type: 'apartment'
+  },
+  {
+    id: 'listing-44', hostId: 'user-host-1',
+    title: 'Cozy Beach House Bamburi',
+    description: 'Full house with a private backyard and outdoor BBQ area, just 5 minutes from the ocean.',
+    image: 'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?w=600&h=400&fit=crop'],
+    location: 'Bamburi Link Road', city: 'Mombasa', country: 'Kenya',
+    lat: -3.99, lng: 39.73, pricePerNight: 130, maxGuests: 6, bedrooms: 3, beds: 4, bathrooms: 2,
+    amenities: ['BBQ Grill', 'WiFi', 'Garden', 'Beach Access'], rating: 4.83, reviews: 19, availability: [], type: 'house'
+  },
+  {
+    id: 'listing-45', hostId: 'user-host-1',
+    title: 'Serene Room in Shanzu',
+    description: 'Quiet room in a gated community, perfect for budget travelers visiting the coast.',
+    image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=600&h=400&fit=crop'],
+    location: 'Shanzu Gardens', city: 'Mombasa', country: 'Kenya',
+    lat: -3.96, lng: 39.75, pricePerNight: 40, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
+    amenities: ['WiFi', 'Fan', 'Shared Kitchen'], rating: 4.69, reviews: 31, availability: [], type: 'room'
+  },
+  {
+    id: 'listing-46', hostId: 'user-host-1',
+    title: 'Nakuru City View Flat',
+    description: 'Modern 1-bedroom flat in the city center with a balcony overlooking Nakuru.',
+    image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop'],
+    location: 'Kenyatta Avenue', city: 'Nakuru', country: 'Kenya',
+    lat: -0.28, lng: 36.07, pricePerNight: 60, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
+    amenities: ['WiFi', 'Smart TV', 'Elevator'], rating: 4.81, reviews: 10, availability: [], type: 'apartment'
+  },
+  {
+    id: 'listing-47', hostId: 'user-host-1',
+    title: 'Homestay Room near National Park',
+    description: 'Experience local hospitality in this warm and clean room close to Lake Nakuru.',
+    image: 'https://images.unsplash.com/photo-1505691938895-1758d7eaa511?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1505691938895-1758d7eaa511?w=600&h=400&fit=crop'],
+    location: 'Lanet Road', city: 'Nakuru', country: 'Kenya',
+    lat: -0.30, lng: 36.12, pricePerNight: 35, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
+    amenities: ['WiFi', 'Breakfast Included', 'Parking'], rating: 4.90, reviews: 45, availability: [], type: 'room'
+  },
+  {
+    id: 'listing-48', hostId: 'user-host-1',
+    title: 'Nakuru Hillside Villa',
+    description: 'Spacious villa on the hills with a private garden and spectacular sunrise views.',
+    image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop'],
+    location: 'Milimani Heights', city: 'Nakuru', country: 'Kenya',
+    lat: -0.27, lng: 36.06, pricePerNight: 280, maxGuests: 8, bedrooms: 4, beds: 5, bathrooms: 3,
+    amenities: ['Garden', 'WiFi', 'BBQ Grill', 'Fireplace'], rating: 4.96, reviews: 7, availability: [], type: 'villa'
+  },
+  {
+    id: 'listing-49', hostId: 'user-host-1',
+    title: 'Lake Escape Apartment',
+    description: 'Modern apartment in a secure complex with easy access to Naivasha town and the lake.',
+    image: 'https://images.unsplash.com/photo-1515263487990-61b07816b324?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1515263487990-61b07816b324?w=600&h=400&fit=crop'],
+    location: 'North Lake Road', city: 'Naivasha', country: 'Kenya',
+    lat: -0.70, lng: 36.40, pricePerNight: 90, maxGuests: 4, bedrooms: 2, beds: 2, bathrooms: 1,
+    amenities: ['WiFi', 'Parking', 'Kitchen'], rating: 4.78, reviews: 11, availability: [], type: 'apartment'
+  },
+  {
+    id: 'listing-50', hostId: 'user-host-1',
+    title: 'Rustic Room in Naivasha',
+    description: 'Charming farmhouse room surrounded by acacia trees and roaming zebras.',
+    image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop'],
+    location: 'South Lake Farm', city: 'Naivasha', country: 'Kenya',
+    lat: -0.75, lng: 36.45, pricePerNight: 50, maxGuests: 2, bedrooms: 1, beds: 1, bathrooms: 1,
+    amenities: ['WiFi', 'Farm Experience', 'Fire Pit'], rating: 4.92, reviews: 52, availability: [], type: 'room'
+  },
+  {
+    id: 'listing-51', hostId: 'user-host-1',
+    title: 'Naivasha Family Homestead',
+    description: 'Large colonial-style house with a wraparound porch and expansive grounds for kids.',
+    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&h=400&fit=crop'],
+    location: 'Sanctuary Farm Road', city: 'Naivasha', country: 'Kenya',
+    lat: -0.74, lng: 36.38, pricePerNight: 200, maxGuests: 10, bedrooms: 5, beds: 8, bathrooms: 4,
+    amenities: ['Garden', 'WiFi', 'Basketball Court', 'Parking'], rating: 4.88, reviews: 26, availability: [], type: 'house'
+  },
+  {
+    id: 'listing-52', hostId: 'user-host-1',
+    title: 'Safari Edge Villa',
+    description: 'Modern luxury villa on the edge of the sanctuary. Watch giraffes from your patio.',
+    image: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&h=400&fit=crop'],
+    location: 'Acacia Drive', city: 'Naivasha', country: 'Kenya',
+    lat: -0.73, lng: 36.42, pricePerNight: 380, maxGuests: 6, bedrooms: 3, beds: 4, bathrooms: 3,
+    amenities: ['Private Pool', 'WiFi', 'Wildlife View', 'Chef'], rating: 4.97, reviews: 9, availability: [], type: 'villa'
+  },
+  {
+    id: 'listing-53', hostId: 'user-host-1',
+    title: 'Malindi Palms Villa',
+    description: 'Beautiful white-walled villa with Italian influences and a gorgeous sun terrace.',
+    image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=600&h=400&fit=crop'],
+    location: 'Marine Park Road', city: 'Malindi', country: 'Kenya',
+    lat: -3.23, lng: 40.11, pricePerNight: 350, maxGuests: 8, bedrooms: 4, beds: 6, bathrooms: 4,
+    amenities: ['WiFi', 'Pool', 'Sun Terrace', 'Chef'], rating: 4.94, reviews: 13, availability: [], type: 'villa'
+  },
+  {
+    id: 'listing-54', hostId: 'user-host-1',
+    title: 'Malindi Garden House',
+    description: 'A charming house surrounded by tropical plants, offering privacy and tranquility.',
+    image: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=600&h=400&fit=crop',
+    images: ['https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=600&h=400&fit=crop'],
+    location: 'Tropical Lane', city: 'Malindi', country: 'Kenya',
+    lat: -3.24, lng: 40.13, pricePerNight: 120, maxGuests: 4, bedrooms: 2, beds: 3, bathrooms: 1,
+    amenities: ['Garden', 'WiFi', 'Gazebo'], rating: 4.80, reviews: 22, availability: [], type: 'house'
   },
 ];
 
