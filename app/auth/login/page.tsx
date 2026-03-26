@@ -4,7 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { AlertCircle, Eye, EyeOff, ArrowRight, Star, Zap, Check } from "lucide-react";
+import { AlertCircle, Eye, EyeOff, ArrowRight, Star, Zap, Check, Users, Home, Shield } from "lucide-react";
 import LogoBadge from "@/components/shared/logo-badge";
 import { LocationSelector } from "@/components/auth/location-selector";
 
@@ -102,6 +102,9 @@ export default function LoginPage() {
           --su-panel-border: var(--border);
           --su-panel-primary: var(--primary);
           --su-panel-soft: color-mix(in oklch, var(--primary) 20%, transparent);
+          --su-guest-bg: oklch(0.96 0.02 12 / 0.7);
+          --su-host-bg: oklch(0.98 0.005 180 / 0.5);
+          --su-admin-bg: oklch(0.97 0.01 260 / 0.6);
         }
 
         /* ── Layout ── */
@@ -582,64 +585,107 @@ export default function LoginPage() {
         .role-cards {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 12px;
-          margin: 1.25rem 0;
+          gap: 0;
+          margin: 1.5rem 0;
+          border: 1px solid var(--su-border);
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        @media (max-width: 480px) {
+          .role-cards { grid-template-columns: repeat(3, 1fr); gap: 0; margin: 1rem 0; border-radius: 12px; }
+          .role-card { padding: 12px 4px; border-radius: 0; gap: 4px; }
+          .role-card-icon-box { width: 36px; height: 36px; border-radius: 8px; margin-bottom: 0; }
+          .role-card-icon-box svg { width: 18px; height: 18px; }
+          .role-card-title { font-size: 0.65rem; font-weight: 500; letter-spacing: 0; }
+          .role-card-desc { display: none; }
+          .role-card-check { width: 14px; height: 14px; top: 4px; right: 4px; }
+          .role-card-check svg { width: 8px; height: 8px; }
         }
 
         .role-card {
-          padding: 1rem 0.6rem;
-          border-radius: 12px;
-          border: 1.5px solid var(--su-border);
-          background: var(--su-surface);
+          padding: 24px 12px;
+          aspect-ratio: 1 / 1;
+          border: none;
+          border-right: 1px solid var(--su-border);
+          background: var(--su-bg);
           cursor: pointer;
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
+          text-align: center;
           gap: 8px;
-          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
           position: relative;
           overflow: hidden;
         }
 
+        .role-card:last-child {
+          border-right: none;
+        }
+
         .role-card:hover {
-          background: var(--su-surface-hover);
+          transform: translateY(-4px);
           border-color: var(--su-border-hover);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 12px 28px rgba(0,0,0,0.06);
         }
 
         .role-card.active {
           border-color: var(--su-primary);
-          background: var(--su-primary-soft);
-          box-shadow: 0 0 0 1px var(--su-primary);
+          background: var(--su-bg);
+          box-shadow: 0 0 0 1px var(--su-primary), 0 12px 32px var(--su-primary-ring);
         }
 
-        .role-card.active::after {
-          content: "";
+        .role-card.guest.active { background: var(--su-guest-bg); }
+        .role-card.host.active  { background: var(--su-host-bg); }
+        .role-card.admin.active { background: var(--su-admin-bg); }
+
+        .role-card-check {
           position: absolute;
-          top: 8px;
-          right: 8px;
-          width: 6px;
-          height: 6px;
+          top: 12px; right: 12px;
+          width: 20px; height: 20px;
           border-radius: 50%;
           background: var(--su-primary);
+          color: #fff;
+          display: flex; align-items: center; justify-content: center;
+          opacity: 0; transform: scale(0.5);
+          transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .role-card-icon {
-          font-size: 1.4rem;
+        .role-card.active .role-card-check {
+          opacity: 1; transform: scale(1);
+        }
+
+        .role-card-icon-box {
+          width: 52px; height: 52px;
+          border-radius: 14px;
+          background: var(--su-surface);
+          display: flex; align-items: center; justify-content: center;
+          color: var(--su-fg-muted);
+          transition: all 0.3s;
+          margin-bottom: 4px;
+        }
+
+        .role-card.active .role-card-icon-box {
+          background: #fff;
+          color: var(--su-primary);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .role-card-title {
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: var(--su-fg);
           line-height: 1;
         }
 
-        .role-card-label {
-          font-size: 0.8rem;
-          font-weight: 600;
-          color: var(--su-fg-muted);
-          letter-spacing: 0.02em;
-          transition: color 0.2s;
-        }
-
-        .role-card.active .role-card-label {
-          color: var(--su-primary);
+        .role-card-desc {
+          font-size: 0.82rem;
+          color: var(--su-fg-subtle);
+          line-height: 1.4;
+          max-width: 180px;
         }
 
         .demo-title {
@@ -945,17 +991,21 @@ export default function LoginPage() {
                 <label className="field-label">I want to login as</label>
                 <div className="role-cards">
                   {[
-                    { id: "guest", label: "Guest", icon: "🏖️" },
-                    { id: "host", label: "Host", icon: "🏠" },
-                    { id: "admin", label: "Admin", icon: "⚡" },
+                    { id: "guest", title: "Book Stays", desc: "Explore & reserve unique homes worldwide", icon: Users },
+                    { id: "host",  title: "Host Property", desc: "List your space and earn extra income", icon: Home },
+                    { id: "admin", title: "Admin Panel", desc: "Manage the platform and system configs", icon: Shield },
                   ].map((r) => (
                     <div
                       key={r.id}
-                      className={`role-card ${role === r.id ? "active" : ""}`}
+                      className={`role-card ${r.id} ${role === r.id ? "active" : ""}`}
                       onClick={() => setRole(r.id as any)}
                     >
-                      <span className="role-card-icon">{r.icon}</span>
-                      <span className="role-card-label">{r.label}</span>
+                      <div className="role-card-check"><Check size={12} strokeWidth={3} /></div>
+                      <div className="role-card-icon-box">
+                        <r.icon size={24} />
+                      </div>
+                      <div className="role-card-title">{r.title}</div>
+                      <div className="role-card-desc">{r.desc}</div>
                     </div>
                   ))}
                 </div>

@@ -336,79 +336,107 @@ export default function SignupPage() {
         /* Role cards */
         .role-cards {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 10px;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0;
           margin-bottom: 1.5rem;
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
 
         @media (max-width: 480px) {
-          .role-cards { grid-template-columns: 1fr; }
+          .role-cards { grid-template-columns: repeat(3, 1fr); gap: 0; margin: 1rem 0; border-radius: 12px; }
+          .role-card { padding: 12px 4px; border-radius: 0; gap: 4px; }
+          .role-card-icon-box { width: 36px; height: 36px; border-radius: 8px; margin-bottom: 0; }
+          .role-card-icon-box svg { width: 18px; height: 18px; }
+          .role-card-title { font-size: 0.65rem; font-weight: 500; letter-spacing: 0; }
+          .role-card-desc { display: none; }
+          .role-check { width: 14px; height: 14px; top: 4px; right: 4px; }
+          .role-check svg { width: 8px; height: 8px; }
           .fields-row { grid-template-columns: 1fr !important; }
         }
 
         .role-card {
-          position: relative;
-          padding: 1rem;
-          border-radius: 10px;
-          border: 1.5px solid var(--border);
-          background: color-mix(in oklch, var(--card) 85%, var(--background));
+          padding: 24px 12px;
+          aspect-ratio: 1 / 1;
+          border: none;
+          border-right: 1px solid var(--border);
+          background: var(--background);
           cursor: pointer;
-          transition: all 0.25s;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
           text-align: center;
+          gap: 8px;
+          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+          position: relative;
+          overflow: hidden;
           color: var(--muted-foreground);
         }
 
+        .role-card:last-child {
+          border-right: none;
+        }
+
         .role-card:hover {
+          transform: translateY(-4px);
           border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
-          background: color-mix(in oklch, var(--primary) 10%, transparent);
-          color: var(--foreground);
+          box-shadow: 0 12px 28px rgba(0,0,0,0.06);
         }
 
         .role-card.selected {
           border-color: var(--primary);
-          background: color-mix(in oklch, var(--primary) 16%, transparent);
+          background: color-mix(in oklch, var(--primary) 8%, var(--background));
+          box-shadow: 0 0 0 1px var(--primary), 0 12px 32px color-mix(in oklch, var(--primary) 20%, transparent);
           color: var(--foreground);
-        }
-
-        .role-card-icon {
-          margin: 0 auto 0.5rem;
-          display: flex; align-items: center; justify-content: center;
-          width: 36px; height: 36px;
-          border-radius: 8px;
-          background: color-mix(in oklch, var(--primary) 16%, transparent);
-        }
-
-        .role-card.selected .role-card-icon {
-          background: color-mix(in oklch, var(--primary) 28%, transparent);
-        }
-
-        .role-card-title {
-          font-size: 0.82rem;
-          font-weight: 500;
-          margin-bottom: 2px;
-        }
-
-        .role-card-desc {
-          font-size: 0.72rem;
-          opacity: 0.6;
-          line-height: 1.4;
         }
 
         .role-check {
           position: absolute;
-          top: 8px; right: 8px;
-          width: 16px; height: 16px;
+          top: 12px; right: 12px;
+          width: 20px; height: 20px;
           border-radius: 50%;
           background: var(--primary);
+          color: #fff;
           display: flex; align-items: center; justify-content: center;
-          opacity: 0;
-          transform: scale(0.6);
-          transition: all 0.2s;
+          opacity: 0; transform: scale(0.5);
+          transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .role-card.selected .role-check {
-          opacity: 1;
-          transform: scale(1);
+          opacity: 1; transform: scale(1);
+        }
+
+        .role-card-icon-box {
+          width: 52px; height: 52px;
+          border-radius: 14px;
+          background: color-mix(in oklch, var(--card) 95%, var(--background));
+          display: flex; align-items: center; justify-content: center;
+          color: var(--muted-foreground);
+          transition: all 0.3s;
+          margin-bottom: 4px;
+        }
+
+        .role-card.selected .role-card-icon-box {
+          background: #fff;
+          color: var(--primary);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .role-card-title {
+          font-size: 0.95rem;
+          font-weight: 500;
+          color: var(--foreground);
+          line-height: 1;
+        }
+
+        .role-card-desc {
+          font-size: 0.82rem;
+          color: var(--muted-foreground);
+          line-height: 1.4;
+          max-width: 180px;
         }
 
         /* Fields */
@@ -908,17 +936,23 @@ export default function SignupPage() {
                     {[
                       {
                         value: "guest",
-                        icon: <Users size={16} color="var(--primary)" />,
+                        icon: Users,
                         title: "Book Stays",
                         desc: "Explore & reserve unique homes worldwide",
                       },
                       {
                         value: "host",
-                        icon: <Home size={16} color="var(--primary)" />,
+                        icon: Home,
                         title: "Host Property",
-                        desc: "List your space and earn income",
+                        desc: "List your space and earn extra income",
                       },
-                    ].map(({ value, icon, title, desc }) => (
+                      {
+                        value: "admin",
+                        icon: Star, // Using Star icon as a fallback or Shield if available
+                        title: "Admin Panel",
+                        desc: "Manage users and platform settings",
+                      },
+                    ].map(({ value, icon: Icon, title, desc }) => (
                       <div
                         key={value}
                         className={`role-card ${formData.role === value ? "selected" : ""}`}
@@ -930,9 +964,11 @@ export default function SignupPage() {
                         }
                       >
                         <div className="role-check">
-                          <Check size={9} color="white" />
+                          <Check size={11} strokeWidth={3} />
                         </div>
-                        <div className="role-card-icon">{icon}</div>
+                        <div className="role-card-icon-box">
+                          <Icon size={24} />
+                        </div>
                         <div className="role-card-title">{title}</div>
                         <div className="role-card-desc">{desc}</div>
                       </div>

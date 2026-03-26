@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { MOCK_LISTINGS, MOCK_BOOKINGS } from '@/lib/mock-data';
 import { Footer } from '@/components/shared/footer';
+import RecentBookingPopup from '@/components/guest/recent-booking-popup';
 
 const CATEGORIES = [
   { key: 'all',       label: 'All Stays',   icon: '✦' },
@@ -2067,6 +2068,7 @@ export default function GuestHome() {
             FOOTER
         ══════════════════════════════════ */}
         <Footer />
+        <RecentBookingPopup />
 
       </div>{/* end .gd */}
 
