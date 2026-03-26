@@ -8,7 +8,7 @@ import {
   MapPin, Plus, Eye, Edit, Bell, ArrowRight, ChevronRight, ChevronLeft,
   Bed, CheckCircle, XCircle, Clock, AlertCircle, BarChart2,
   Percent, MessageSquare, Settings, Zap, Award, Shield,
-  RefreshCw, ExternalLink, ChevronDown, ChevronUp, Sparkles,
+  RefreshCw, ExternalLink, ChevronDown, ChevronUp, Crown,
   FileText, Activity
 } from 'lucide-react';
 import { MOCK_LISTINGS, MOCK_BOOKINGS } from '@/lib/mock-data';
@@ -1039,7 +1039,7 @@ export default function HostDashboard() {
             <div className="hd-card">
               <div className="hd-card-head">
                 <div className="hd-card-head-left">
-                  <div className="hd-hdr-icon"><Sparkles size={15}/></div>
+                  <div className="hd-hdr-icon"><Crown size={15}/></div>
                   <span className="hd-ttl">Tips & Insights</span>
                 </div>
               </div>

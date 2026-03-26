@@ -7,7 +7,7 @@ import {
   User, Mail, Phone, FileText, ShieldCheck, Camera,
   CheckCircle2, AlertCircle, Save, Lock, Bell, Eye,
   EyeOff, Globe, MapPin, Calendar, Star, Heart,
-  BookOpen, ChevronRight, Sparkles, Award, Clock,
+  BookOpen, ChevronRight, Crown, Award, Clock,
   Instagram, Twitter, Facebook, ExternalLink, Trash2,
 } from 'lucide-react';
 
@@ -727,7 +727,7 @@ export default function ProfilePage() {
                     <div className="gp-panel-title">Edit Profile</div>
                     <div className="gp-panel-sub">Update your public information and preferences</div>
                   </div>
-                  <div className="gp-panel-badge"><Sparkles size={11} /> Auto-saved</div>
+                  <div className="gp-panel-badge"><Crown size={11} /> Auto-saved</div>
                 </div>
 
                 <div className="gp-panel-body">

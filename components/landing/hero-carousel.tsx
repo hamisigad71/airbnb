@@ -742,7 +742,7 @@ export default function HeroCarousel({
         <div className="hc-text-over">
           <div className="hc-eyebrow" key={`eyebrow-${selectedIndex}`} style={{ animation: 'hcSlideIn 0.5s ease both' }}>
             <div className="hc-eyebrow-dot" />
-            {currentTime}, {userName} 👋 · {listingCount}+ stays available
+            Find your next stay, {userName}
           </div>
 
           {SLIDES.map((slide, i) => (
@@ -833,19 +833,6 @@ export default function HeroCarousel({
             </button>
           </div>
 
-          {/* Category pills */}
-          <div className="hc-cats">
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat.key}
-                className={cn('hc-pill', activeCategory === cat.key && 'active')}
-                onClick={() => onCategoryChange?.(cat.key)}
-              >
-                <span>{cat.icon}</span>
-                {cat.label}
-              </button>
-            ))}
-          </div>
 
           {/* Expandable filter panel */}
           {showFilters && (

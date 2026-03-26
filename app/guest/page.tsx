@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import {
-  Heart, MapPin, Star, Users, Bed, Bath, Sparkles,
+  Heart, MapPin, Star, Users, Bed, Bath, Crown,
   TrendingUp, Flame, ArrowRight, Search, Calendar,
   ShieldCheck, Clock, Wifi, Wind, Coffee, ChevronRight,
   Zap, Globe, Award, Phone, Mail, MessageCircle,
@@ -363,9 +363,10 @@ export default function GuestHome() {
         }
 
         .gd-hero-sub {
-          font-size: 14px; font-weight: 300;
-          color: rgba(255,255,255,0.68); line-height: 1.75;
+          font-size: 14px; font-weight: 400;
+          color: rgba(255,255,255,0.92); line-height: 1.75;
           max-width: 430px;
+          text-shadow: 0 2px 14px rgba(0,0,0,0.25);
           animation: gdHeroSlideUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.3s both;
         }
 
@@ -379,7 +380,7 @@ export default function GuestHome() {
         ══════════════════════════════════════════ */
         .gd-hero-search-wrap {
           position: absolute;
-          bottom: 0; left: 0; right: 0; z-index: 20;
+          bottom: 24px; left: 0; right: 0; z-index: 20;
           padding: 0 20px;
           animation: gdHeroSlideUp 0.75s cubic-bezier(0.22,1,0.36,1) 0.4s both;
         }
@@ -498,14 +499,13 @@ export default function GuestHome() {
           position: relative;
           z-index: 5;
           max-width: 1400px;
-          margin: 0 auto;
+          margin: 48px auto 0;
           padding: 0 40px;
         }
         .gd-hero-stats {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 16px;
-          transform: translateY(-40px);
         }
 
         .gd-stat {
@@ -1365,8 +1365,9 @@ export default function GuestHome() {
         }
         @media (max-width: 768px) {
           .gd-hero { min-height: 780px; }
-          .gd-hero-content { padding: 0 20px 40px; bottom: 360px !important; }
-          .gd-hero-search-wrap { bottom: 84px !important; }
+          .gd-hero-content { padding: 0 20px 40px; bottom: 330px !important; }
+          .gd-hero-search-wrap { bottom: 44px !important; }
+          .gd-search-card { border-radius: 24px; border-bottom: 1px solid var(--border); box-shadow: 0 10px 48px oklch(0 0 0 / 0.15); }
           .gd-hero-search { flex-direction: column; align-items: stretch; height: auto; border-radius: 20px; padding: 12px; gap: 10px; }
           .gd-search-fields { grid-template-columns: 1fr 1fr; }
           .gd-sf:first-child { grid-column: span 2; }
@@ -1374,28 +1375,33 @@ export default function GuestHome() {
           .gd-hs-field { width: 100%; height: 60px; border-right: none; border-bottom: 1px solid oklch(0.92 0.002 0); border-radius: 12px; background: oklch(0.975 0.001 0); padding: 0 18px; }
           .gd-hs-field:last-of-type { border-bottom: none; }
           .gd-hs-btn { width: 100%; height: 54px; border-radius: 12px; justify-content: center; margin: 4px 0 0; }
-          .gd-hero-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; transform: translateY(-44px); }
-          .gd-stat { padding: 12px 8px; flex-direction: column; text-align: center; gap: 8px; min-height: 110px; justify-content: center; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); }
+          .gd-hero-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; transform: none; }
+          .gd-stat { padding: 12px 8px; flex-direction: column; text-align: center; gap: 8px; min-height: 110px; justify-content: center; background: rgba(255,255,255,1); border: 1px solid var(--border); }
           .gd-stat-icon { width: 32px; height: 32px; border-radius: 10px; }
           .gd-stat-val { font-size: 1.1rem; }
           .gd-stat-lbl { font-size: 0.62rem; line-height: 1.1; }
           .gd-stat-trend { font-size: 0.58rem; justify-content: center; }
           .gd-section { padding: 0 16px; }
           .gd-trust-strip { padding: 0 16px; }
-          .gd-hero-stats-wrap { padding: 0 16px; }
+          .gd-hero-stats-wrap { padding: 0 16px; margin-top: 24px; }
           .gd-trust-grid { grid-template-columns: repeat(2, 1fr); }
           .gd-quick-grid { grid-template-columns: repeat(2, 1fr); }
           .gd-hero-dots { display: none; }
           .gd-trust-row { gap: 16px; }
           .gd-footer-inner { padding: 48px 20px 0; }
           .gd-footer-top { grid-template-columns: 1fr; gap: 32px; }
-          .gd-support-cards { grid-template-columns: 1fr; }
+          .gd-support-cards { grid-template-columns: 1fr 1fr; gap: 8px; }
+          .gd-sc { padding: 14px 12px; gap: 8px; }
+          .gd-sc-icon { width: 34px; height: 34px; border-radius: 10px; }
+          .gd-sc-title { font-size: 0.8rem; }
+          .gd-sc-sub { font-size: 0.7rem; line-height: 1.3; }
+          .gd-sc-tag { font-size: 0.6rem; padding: 2px 6px; }
           .gd-support-stats { gap: 20px; flex-wrap: wrap; }
         }
         @media (max-width: 640px) {
           .gd-hero-title { font-size: 1.8rem; line-height: 1.15; }
           .gd-hero-sub { font-size: 12px; line-height: 1.6; }
-          .gd-hero-content { bottom: 420px !important; }
+          .gd-hero-content { bottom: 380px !important; }
           .gd-search-label { font-size: 12px; }
           .gd-search-meta { display: none; }
           .gd-grid { grid-template-columns: 1fr; }
@@ -1833,7 +1839,7 @@ export default function GuestHome() {
             <Link href={`/guest/listings/${topRated.id}`} className="gd-highlight-card">
               <div className="gd-hi-img-wrap">
                 <img src={topRated.image} alt={topRated.title} className="gd-hi-img" />
-                <div className="gd-hi-badge"><Sparkles size={13} /> Top Rated</div>
+                <div className="gd-hi-badge"><Crown size={13} /> Top Rated</div>
               </div>
               <div className="gd-hi-body">
                 <div className="gd-hi-eyebrow">Featured Property</div>
@@ -1886,7 +1892,7 @@ export default function GuestHome() {
         <div className="gd-section gd-up gd-d7" style={{ marginTop: 48 }}>
           <div className="gd-hdr">
             <div className="gd-hdr-left">
-              <div className="gd-hdr-icon"><Sparkles size={18}/></div>
+              <div className="gd-hdr-icon"><Crown size={18}/></div>
               <h2 className="gd-ttl"> {userCountry ? `Top Stays in ${userCountry}` : 'Top Recommended Stays'}</h2>
             </div>
           </div>

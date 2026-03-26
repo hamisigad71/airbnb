@@ -7,7 +7,7 @@ import TestimonialCarousel from "@/components/landing/testimonial-carousel";
 import { Footer } from "@/components/shared/footer";
 import {
   ShieldCheck, Map, Users, Star, ArrowRight, Search,
-  Building2, Sparkles, Heart, Quote, CheckCircle2,
+  Building2, Crown, Heart, Quote, CheckCircle2,
   Globe, TrendingUp, Zap, Phone, Mail, Twitter,
   Instagram, Linkedin, Facebook, ChevronRight,
   Award, Clock, DollarSign, Wifi, Car, Coffee,
@@ -89,7 +89,7 @@ const HOW_IT_WORKS = [
   },
   {
     step: "03",
-    icon: <Sparkles className="w-6 h-6" />,
+    icon: <Crown className="w-6 h-6" />,
     title: "Experience & Explore",
     desc: "Arrive to a fully prepared home. Get insider tips from your host and live the destination like a local.",
     color: "#0ea5e9",
@@ -1073,7 +1073,7 @@ export default async function Home() {
                   <div className="lp-dest-city">{d.city}</div>
                   <div className="lp-dest-country">{d.country}</div>
                   <div className="lp-dest-props">
-                    <Sparkles className="w-3 h-3" />
+                    <Crown className="w-3 h-3" />
                     {d.properties} Unique Stays
                   </div>
                 </div>
