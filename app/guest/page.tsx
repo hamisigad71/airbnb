@@ -1293,7 +1293,7 @@ export default function GuestHome() {
         @media (max-width: 640px) {
           .gd-hero-title { font-size: 2.2rem; }
           .gd-grid { grid-template-columns: 1fr; }
-          .gd-trust-grid { grid-template-columns: 1fr; }
+          .gd-trust-grid { grid-template-columns: repeat(2, 1fr); }
           .gd-hero-stats { grid-template-columns: 1fr; }
           .gd-offer { width: 270px; }
           .gd-dest { width: 150px; }
