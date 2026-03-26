@@ -133,7 +133,7 @@ const FLAG: Record<string, string> = {
 };
 
 // Clean "Note" style chime sound URL (iPhone inspired)
-const NOTIFICATION_SOUND_URL = 'https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3';
+const NOTIFICATION_SOUND_URL = '/mixkit-correct-answer-tone-2870.wav';
 
 export default function RecentBookingPopup() {
   const [visible, setVisible]       = useState(false);
@@ -150,7 +150,7 @@ export default function RecentBookingPopup() {
     audioRef.current.volume = 0.4;
 
     const show = (idx: number) => {
-      if (dismissed) return;
+      if (dismissed || document.visibilityState !== 'visible') return;
       setCurrent(BOOKINGS[idx % BOOKINGS.length]);
       setLeaving(false);
       setVisible(true);
