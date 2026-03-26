@@ -7,16 +7,6 @@ import { ArrowLeft, Tag, Percent, Zap, Calendar, Sparkles, ChevronRight, Info } 
 export default function HostPromotionsPage() {
   return (
     <div className="min-h-screen bg-[oklch(0.99_0.001_0)] pb-24">
-      <header className="h-20 px-8 bg-white border-b border-[oklch(0.92_0.002_0)] flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-6">
-          <Link href="/host" className="flex items-center gap-2 text-[oklch(0.1_0.001_0)] hover:opacity-70 transition-opacity">
-            <ArrowLeft size={20} />
-          </Link>
-          <div className="h-8 w-[1px] bg-[oklch(0.92_0.002_0)]" />
-          <h1 className="text-xl font-black text-[oklch(0.1_0.001_0)]">Discounts & Promotions</h1>
-        </div>
-      </header>
-
       <main className="max-w-5xl mx-auto px-8 py-12">
         <div className="mb-12">
           <h2 className="text-4xl font-black text-[oklch(0.1_0.001_0)] mb-4">Attract more guests</h2>

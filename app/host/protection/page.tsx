@@ -7,18 +7,16 @@ import { ArrowLeft, Shield, CheckCircle, ShieldCheck, ShieldAlert, FileText, Pho
 export default function HostProtectionPage() {
   return (
     <div className="min-h-screen bg-[oklch(0.99_0.001_0)] pb-24">
-      <header className="h-20 px-8 bg-white border-b border-[oklch(0.92_0.002_0)] flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-6">
-          <Link href="/host" className="flex items-center gap-2 text-[oklch(0.1_0.001_0)] hover:opacity-70 transition-opacity">
-            <ArrowLeft size={20} />
-          </Link>
-          <div className="h-8 w-[1px] bg-[oklch(0.92_0.002_0)]" />
-          <h1 className="text-xl font-black text-[oklch(0.1_0.001_0)]">StayLux Protection</h1>
-        </div>
-        <button className="hd-btn hd-btn-outline px-4 py-2 text-xs">File a Claim</button>
-      </header>
-
       <main className="max-w-5xl mx-auto px-8 py-12">
+        {/* Back Navigation & Actions */}
+        <div className="flex items-center justify-between mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
+          <Link href="/host" className="flex items-center gap-2 text-[oklch(0.55_0.005_0)] hover:text-[oklch(0.1_0.001_0)] font-bold text-sm uppercase tracking-widest transition-all">
+            <ArrowLeft size={16} />
+            Back to Dashboard
+          </Link>
+          <button className="hd-btn hd-btn-outline px-6 py-2.5 text-xs font-black uppercase tracking-widest">File a Claim</button>
+        </div>
+
         <div className="bg-gradient-to-br from-[oklch(0.4_0.155_11.87)] to-[oklch(0.2_0.155_11.87)] rounded-[48px] p-16 text-white text-center mb-12 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[100px] -translate-y-1/2 translate-x-1/2 rounded-full" />
           <div className="relative z-10">

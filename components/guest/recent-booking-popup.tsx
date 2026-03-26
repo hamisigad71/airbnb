@@ -177,7 +177,7 @@ export default function RecentBookingPopup() {
     let count = 1;
     const iv = setInterval(() => {
       show(count++);
-    }, 25000);
+    },  55000);
 
     return () => { clearTimeout(t1); clearInterval(iv); };
   }, [dismissed]);

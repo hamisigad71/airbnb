@@ -48,22 +48,6 @@ export default function HostInboxPage() {
 
   return (
     <div className="h-screen flex flex-col bg-[oklch(0.99_0.001_0)]">
-      {/* Mini Host Header */}
-      <header className="h-16 px-6 bg-[oklch(0.1_0.001_0)] text-white flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link href="/host" className="font-black text-xl hover:opacity-80 transition-opacity">StayLux Host</Link>
-          <div className="h-6 w-[1px] bg-white/20 mx-2" />
-          <nav className="flex gap-4 text-xs font-bold uppercase tracking-widest text-white/60">
-            <Link href="/host" className="hover:text-white transition-colors">Dashboard</Link>
-            <Link href="/host/listings" className="hover:text-white transition-colors">Listings</Link>
-            <Link href="/host/bookings" className="hover:text-white transition-colors">Bookings</Link>
-            <Link href="/host/messages" className="text-white">Inbox</Link>
-          </nav>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-bold">BS</div>
-        </div>
-      </header>
       
       <main className="flex-1 flex overflow-hidden">
         {/* Conversations Sidebar */}

@@ -7,24 +7,19 @@ import { ArrowLeft, TrendingUp, TrendingDown, DollarSign, Users, Star, BarChart,
 export default function HostAnalyticsPage() {
   return (
     <div className="min-h-screen bg-[oklch(0.99_0.001_0)] pb-24">
-      {/* Header */}
-      <header className="h-20 px-8 bg-white border-b border-[oklch(0.92_0.002_0)] flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-6">
-          <Link href="/host" className="flex items-center gap-2 text-[oklch(0.1_0.001_0)] hover:opacity-70 transition-opacity">
-            <ArrowLeft size={20} />
+      <main className="max-w-7xl mx-auto px-8 py-10">
+        {/* Back Navigation & Actions */}
+        <div className="flex items-center justify-between mb-8 animate-in fade-in slide-in-from-top-4 duration-700">
+          <Link href="/host" className="flex items-center gap-2 text-[oklch(0.55_0.005_0)] hover:text-[oklch(0.1_0.001_0)] font-bold text-sm uppercase tracking-widest transition-all">
+            <ArrowLeft size={16} />
+            Back to Dashboard
           </Link>
-          <div className="h-8 w-[1px] bg-[oklch(0.92_0.002_0)]" />
-          <h1 className="text-xl font-black text-[oklch(0.1_0.001_0)]">Insights & Analytics</h1>
-        </div>
-        <div className="flex items-center gap-3">
-          <button className="hd-btn hd-btn-outline px-4 py-2 text-xs flex items-center gap-2">
+          <button className="hd-btn hd-btn-outline px-6 py-2.5 text-xs font-black uppercase tracking-widest flex items-center gap-2">
             <Download size={14} />
             Export Data
           </button>
         </div>
-      </header>
 
-      <main className="max-w-7xl mx-auto px-8 py-10">
         {/* Performance Overview */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white p-8 rounded-[32px] border border-[oklch(0.92_0.002_0)] shadow-sm">

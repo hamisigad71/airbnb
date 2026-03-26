@@ -15,21 +15,6 @@ export default function HostCalendarPage() {
 
   return (
     <div className="min-h-screen bg-[oklch(0.99_0.001_0)] pb-24">
-      {/* Mini Host Header */}
-      <header className="h-20 px-8 bg-white border-b border-[oklch(0.92_0.002_0)] flex items-center justify-between sticky top-0 z-50">
-        <div className="flex items-center gap-6">
-          <Link href="/host" className="flex items-center gap-2 text-[oklch(0.1_0.001_0)] hover:opacity-70 transition-opacity">
-            <ArrowLeft size={20} />
-          </Link>
-          <div className="h-8 w-[1px] bg-[oklch(0.92_0.002_0)]" />
-          <h1 className="text-xl font-black text-[oklch(0.1_0.001_0)]">Calendar</h1>
-        </div>
-        <div className="flex items-center gap-3">
-          <button className="hd-btn hd-btn-outline px-4 py-2 text-xs">Pricing tools</button>
-          <button className="hd-btn hd-btn-primary px-4 py-2 text-xs">Settings</button>
-        </div>
-      </header>
-
       <main className="max-w-7xl mx-auto px-8 py-10 flex flex-col lg:flex-row gap-10">
         {/* Calendar Control & Grid */}
         <section className="flex-1 bg-white rounded-[40px] border border-[oklch(0.92_0.002_0)] shadow-sm overflow-hidden">

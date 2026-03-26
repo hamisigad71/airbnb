@@ -17,16 +17,6 @@ export default function NewListingPage() {
 
   return (
     <div className="min-h-screen bg-[oklch(0.99_0.001_0)]">
-      {/* Header */}
-      <header className="h-20 px-8 bg-white border-b border-[oklch(0.92_0.002_0)] flex items-center justify-between sticky top-0 z-50">
-        <Link href="/host" className="flex items-center gap-2 text-[oklch(0.1_0.001_0)] hover:opacity-70 transition-opacity">
-          <ArrowLeft size={20} />
-          <span className="font-black text-sm uppercase tracking-widest">Back to Dashboard</span>
-        </Link>
-        <div className="flex items-center gap-4">
-          <button className="px-6 py-2.5 rounded-xl border border-[oklch(0.92_0.002_0)] font-bold text-xs uppercase tracking-widest hover:bg-[oklch(0.96_0.002_0)] transition-colors">Save & Exit</button>
-        </div>
-      </header>
 
       <main className="max-w-6xl mx-auto px-8 py-12 flex flex-col lg:flex-row gap-16">
         {/* Progress Sidebar */}
