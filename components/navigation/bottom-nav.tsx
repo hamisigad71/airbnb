@@ -26,9 +26,6 @@ export default function BottomNav() {
   const isHostView = pathname.startsWith('/host');
   const isAuthRoute = pathname.startsWith('/auth');
 
-  // If we are on an authentication route, don't render the bottom nav
-  if (isAuthRoute) return null;
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -54,6 +51,9 @@ export default function BottomNav() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // If we are on an authentication route, don't render the bottom nav
+  if (isAuthRoute) return null;
 
   const guestItems = [
     { label: 'Explore', icon: <Home size={22} strokeWidth={2.2} />, href: '/guest' },

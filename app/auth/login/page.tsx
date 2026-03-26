@@ -15,6 +15,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [role, setRole] = useState<"guest" | "host" | "admin">("guest");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,12 +25,14 @@ export default function LoginPage() {
       const result = await signIn("credentials", {
         email,
         password,
+        role,
         redirect: false,
       });
       if (result?.error) {
         setError("Invalid email or password. Please try again.");
       } else if (result?.ok) {
-        router.push("/guest");
+        // Redirect based on selected role
+        router.push("/" + role);
       }
     } catch {
       setError("Something went wrong. Please try again.");
@@ -44,13 +47,15 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
     try {
+      const role = quickLogins.find(q => q.email === quickEmail)?.label.toLowerCase() as any || "guest";
       const result = await signIn("credentials", {
         email: quickEmail,
         password: "password",
+        role,
         redirect: false,
       });
       if (result?.ok) {
-        router.push("/guest");
+        router.push("/" + role);
       } else {
         setError("Quick login failed. Please try again.");
       }
@@ -540,12 +545,11 @@ export default function LoginPage() {
           transform: none;
         }
 
-        /* Demo section */
         .demo-section {
           border: 1.5px solid var(--su-border);
-          border-radius: 10px;
+          border-radius: 12px;
           overflow: hidden;
-          margin-bottom: 1.3rem;
+          margin-top: 1.5rem;
         }
 
         .demo-header {
@@ -571,39 +575,110 @@ export default function LoginPage() {
           padding: 2px 7px;
         }
 
+        .role-cards {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+          margin: 1.25rem 0;
+        }
+
+        .role-card {
+          padding: 1rem 0.6rem;
+          border-radius: 12px;
+          border: 1.5px solid var(--su-border);
+          background: var(--su-surface);
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .role-card:hover {
+          background: var(--su-surface-hover);
+          border-color: var(--su-border-hover);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .role-card.active {
+          border-color: var(--su-primary);
+          background: var(--su-primary-soft);
+          box-shadow: 0 0 0 1px var(--su-primary);
+        }
+
+        .role-card.active::after {
+          content: "";
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--su-primary);
+        }
+
+        .role-card-icon {
+          font-size: 1.4rem;
+          line-height: 1;
+        }
+
+        .role-card-label {
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: var(--su-fg-muted);
+          letter-spacing: 0.02em;
+          transition: color 0.2s;
+        }
+
+        .role-card.active .role-card-label {
+          color: var(--su-primary);
+        }
+
         .demo-title {
           font-size: 0.8rem;
           color: var(--su-fg-muted);
           font-weight: 400;
         }
 
+        /* Demo section */
+        .demo-section {
+          border: 1.5px solid var(--su-border);
+          border-radius: 12px;
+          overflow: hidden;
+          margin-top: 1.5rem;
+          background: var(--su-surface);
+        }
+
         .demo-btns {
           display: flex;
           flex-direction: column;
+          gap: 1px;
+          background: var(--su-border);
         }
 
         .demo-btn {
           display: flex;
           align-items: center;
-          gap: 10px;
-          padding: 0.7rem 0.9rem;
-          background: transparent;
+          gap: 14px;
+          padding: 1rem 1.25rem;
+          background: var(--su-surface);
           border: none;
-          border-bottom: 1px solid var(--su-border);
           cursor: pointer;
-          font-family: 'DM Sans', sans-serif;
-          transition: background 0.18s;
-          text-align: left;
+          transition: all 0.2s;
           width: 100%;
-          color: var(--su-fg);
+          text-align: left;
         }
 
-        .demo-btn:last-child { border-bottom: none; }
-        .demo-btn:hover { background: var(--su-surface-hover); }
-        .demo-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .demo-btn:hover:not(:disabled) {
+          background: var(--su-surface-hover);
+        }
 
         .demo-btn-emoji {
-          font-size: 1rem;
+          font-size: 1.25rem;
           line-height: 1;
           flex-shrink: 0;
         }
@@ -611,10 +686,11 @@ export default function LoginPage() {
         .demo-btn-info { flex: 1; }
 
         .demo-btn-label {
-          font-size: 0.84rem;
-          font-weight: 500;
+          font-size: 0.88rem;
+          font-weight: 600;
           color: var(--su-fg);
           display: block;
+          margin-bottom: 2px;
         }
 
         .demo-btn-email {
@@ -628,7 +704,7 @@ export default function LoginPage() {
         }
 
         .demo-btn:hover .demo-btn-arrow {
-          transform: translateX(3px);
+          transform: translateX(4px);
           color: var(--su-primary);
         }
 
@@ -860,7 +936,27 @@ export default function LoginPage() {
                   Keep me signed in for 30 days
                 </span>
               </label>
-
+ 
+               <div className="field-group">
+                <label className="field-label">I want to login as</label>
+                <div className="role-cards">
+                  {[
+                    { id: "guest", label: "Guest", icon: "🏖️" },
+                    { id: "host", label: "Host", icon: "🏠" },
+                    { id: "admin", label: "Admin", icon: "⚡" },
+                  ].map((r) => (
+                    <div
+                      key={r.id}
+                      className={`role-card ${role === r.id ? "active" : ""}`}
+                      onClick={() => setRole(r.id as any)}
+                    >
+                      <span className="role-card-icon">{r.icon}</span>
+                      <span className="role-card-label">{r.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+ 
               <button className="submit-btn" type="submit" disabled={loading}>
                 {loading ? "Signing in…" : "Sign In"}
                 {!loading && <ArrowRight size={16} />}

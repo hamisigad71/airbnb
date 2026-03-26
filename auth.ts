@@ -12,11 +12,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
+        role: { label: 'Role', type: 'text' },
       },
       async authorize(credentials) {
         // DEMO MODE: Accept any email/password combination
         const email = credentials?.email as string;
         const password = credentials?.password as string;
+        const requestedRole = (credentials?.role as string) || 'guest';
 
         if (!email || !password) return null;
 
@@ -32,13 +34,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           };
         }
 
-        // For any other email/password, create a demo guest account
+        // For any other email/password, create a demo account with the requested role
         const name = email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
         return {
           id: `demo-${Date.now()}`,
           email,
           name,
-          role: 'guest',
+          role: requestedRole,
         };
       },
     }),
@@ -50,8 +52,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.role = (user as any).role;
+        token.id = user.id as string;
+        token.role = user.role;
       }
       return token;
     },

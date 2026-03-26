@@ -95,13 +95,15 @@ export default function SignupPage() {
       const result = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
+        role: formData.role,
         redirect: false,
       });
 
       if (result?.error) {
         setError("This email is already registered. Please sign in.");
       } else if (result?.ok) {
-        router.push("/guest");
+        // Redirect based on selected role
+        router.push("/" + formData.role);
       }
     } catch {
       setError("Something went wrong. Please try again.");
