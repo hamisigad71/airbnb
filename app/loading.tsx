@@ -1,4 +1,4 @@
-import GlassLoader from '@/components/loader/glass-loader';
+import GlassLoader from '@/components/shared/loader/glass-loader';
 
 export default function Loading() {
   return <GlassLoader />;

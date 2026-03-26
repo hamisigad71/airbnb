@@ -12,7 +12,7 @@ import {
   Headphones, LifeBuoy, BookOpen, ChevronLeft, FileText, ChevronDown
 } from 'lucide-react';
 import { MOCK_LISTINGS, MOCK_BOOKINGS } from '@/lib/mock-data';
-import { Footer } from '@/components/footer';
+import { Footer } from '@/components/shared/footer';
 
 const CATEGORIES = [
   { key: 'all',       label: 'All Stays',   icon: '✦' },

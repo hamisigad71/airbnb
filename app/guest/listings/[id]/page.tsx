@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import { MOCK_LISTINGS, MOCK_REVIEWS } from '@/lib/mock-data';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Footer } from '@/components/footer';
+import { Footer } from '@/components/shared/footer';
 
 const amenityIcons: Record<string, React.ReactNode> = {
   WiFi: <Wifi className="h-4 w-4" />,

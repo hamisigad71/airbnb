@@ -12,7 +12,7 @@ import {
   FileText, Activity
 } from 'lucide-react';
 import { MOCK_LISTINGS, MOCK_BOOKINGS } from '@/lib/mock-data';
-import { Footer } from '@/components/footer';
+import { Footer } from '@/components/shared/footer';
 
 const HOST_ID = 'user-host-1';
 

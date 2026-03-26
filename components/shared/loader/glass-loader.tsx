@@ -15,7 +15,9 @@ export default function GlassLoader() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(135deg, #f8f4f0 0%, #f0ece8 40%, #f5f0ec 100%);
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
           z-index: 99999;
           overflow: hidden;
         }
@@ -86,12 +88,12 @@ export default function GlassLoader() {
           width: 272px;
           padding: 48px 38px 42px;
           border-radius: 30px;
-          background: rgba(255, 255, 255, 0.55);
-          backdrop-filter: blur(28px) saturate(1.7);
-          -webkit-backdrop-filter: blur(28px) saturate(1.7);
-          border: 1px solid rgba(255, 255, 255, 0.78);
+          background: rgba(255, 255, 255, 0.35);
+          backdrop-filter: blur(32px) saturate(1.8);
+          -webkit-backdrop-filter: blur(32px) saturate(1.8);
+          border: 1px solid rgba(255, 255, 255, 0.6);
           box-shadow:
-            0 2px 0 rgba(255, 255, 255, 0.92) inset,
+            0 2px 0 rgba(255, 255, 255, 0.7) inset,
             0 -1px 0 rgba(0, 0, 0, 0.04) inset,
             0 24px 64px rgba(255, 56, 92, 0.13),
             0 6px 20px rgba(0, 0, 0, 0.07);
@@ -108,7 +110,7 @@ export default function GlassLoader() {
           position: absolute;
           top: 0; left: 14px; right: 14px;
           height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.95) 50%, transparent);
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.85) 50%, transparent);
           border-radius: 100px;
         }
 
@@ -118,7 +120,7 @@ export default function GlassLoader() {
           position: absolute;
           inset: 0;
           border-radius: 30px;
-          background: linear-gradient(155deg, rgba(255,255,255,0.38) 0%, transparent 55%);
+          background: linear-gradient(155deg, rgba(255,255,255,0.3) 0%, transparent 55%);
           pointer-events: none;
         }
 

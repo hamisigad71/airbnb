@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AlertCircle, Eye, EyeOff, ArrowRight, Star, Zap, Check } from "lucide-react";
-import LogoBadge from "@/components/logo-badge";
+import LogoBadge from "@/components/shared/logo-badge";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -342,9 +342,8 @@ export default function LoginPage() {
           margin-bottom: 1.3rem;
         }
 
-        @media (max-width: 480px) {
-          .social-btns { grid-template-columns: 1fr; }
-        }
+
+
 
         .social-btn {
           display: flex;

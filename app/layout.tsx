@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   },
 }
 
-import InitialLoaderWrapper from '@/components/loader/initial-loader-wrapper'
-import BottomNav from '@/components/bottom-nav'
+import InitialLoaderWrapper from '@/components/shared/loader/initial-loader-wrapper'
+import BottomNav from '@/components/navigation/bottom-nav'
 
 export default function RootLayout({
   children,

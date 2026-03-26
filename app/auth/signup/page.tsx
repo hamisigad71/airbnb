@@ -18,7 +18,7 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
-import LogoBadge from "@/components/logo-badge";
+import LogoBadge from "@/components/shared/logo-badge";
 
 export default function SignupPage() {
   const router = useRouter();

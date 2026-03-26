@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import GlassLoader from '@/components/loader/glass-loader';
+import GlassLoader from '@/components/shared/loader/glass-loader';
 import { Button } from '@/components/ui/button';
 
 export default function LoaderDemo() {

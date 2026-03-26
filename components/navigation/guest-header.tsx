@@ -4,7 +4,7 @@ import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import LogoBadge from '@/components/logo-badge';
+import LogoBadge from '@/components/shared/logo-badge';
 
 export function Header() {
   const { data: session } = useSession();
@@ -461,7 +461,7 @@ export function Header() {
                   <div className="hdr-dropdown-sep" />
                   <button
                     className="hdr-dropdown-item danger"
-                    onClick={() => signOut({ redirectUrl: '/' })}
+                    onClick={() => signOut({ redirectTo: '/' })}
                   >
                     <span>🚪</span>
                     Sign Out
@@ -507,7 +507,7 @@ export function Header() {
 
           <button
             className="hdr-mobile-signout"
-            onClick={() => signOut({ redirectUrl: '/' })}
+            onClick={() => signOut({ redirectTo: '/' })}
           >
             🚪 Sign Out
           </button>

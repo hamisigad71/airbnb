@@ -15,9 +15,10 @@ export default function InitialLoaderWrapper({ children }: { children: React.Rea
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return <GlassLoader />;
-  }
-
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      {loading && <GlassLoader />}
+    </>
+  );
 }
