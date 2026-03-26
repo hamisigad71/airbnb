@@ -1,7 +1,8 @@
-import { Header } from '@/components/header';
-import { AdminNav } from '@/components/admin-nav';
+import { Metadata } from 'next';
+import { Header } from '@/components/navigation/guest-header';
+import { AdminNav } from '@/components/navigation/admin-nav';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Admin Dashboard - Airbnb Clone',
   description: 'Manage platform and analytics',
 };

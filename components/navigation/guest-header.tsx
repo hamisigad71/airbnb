@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import LogoBadge from '@/components/shared/logo-badge';
 
-export function Header() {
+export function Header({ title }: { title?: string }) {
   const { data: session } = useSession();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);

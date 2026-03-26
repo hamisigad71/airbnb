@@ -1,7 +1,8 @@
-import { Header } from '@/components/header';
-import { HostNav } from '@/components/host-nav';
+import { Metadata } from 'next';
+import { Header } from '@/components/navigation/guest-header';
+import { HostNav } from '@/components/navigation/host-nav';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Host Dashboard - Airbnb Clone',
   description: 'Manage your listings and bookings',
 };

@@ -24,6 +24,10 @@ export default function BottomNav() {
 
   // Determine role and view mode
   const isHostView = pathname.startsWith('/host');
+  const isAuthRoute = pathname.startsWith('/auth');
+
+  // If we are on an authentication route, don't render the bottom nav
+  if (isAuthRoute) return null;
 
   useEffect(() => {
     const handleScroll = () => {

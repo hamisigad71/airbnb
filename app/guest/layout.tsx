@@ -1,6 +1,7 @@
-import { Header } from '@/components/header';
+import { Metadata } from 'next';
+import { Header } from '@/components/navigation/guest-header';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'StayLux Ke — Explore Stays',
   description: 'Browse and book unique stays worldwide',
 };
