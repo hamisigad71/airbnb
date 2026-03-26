@@ -1273,10 +1273,10 @@ export default function GuestHome() {
         @media (max-width: 768px) {
           .gd-hero { min-height: 560px; }
           .gd-hero-content { padding: 0 20px 40px; }
-          .gd-hero-search { flex-wrap: wrap; height: auto; border-radius: 16px; padding: 10px; gap: 8px; }
-          .gd-hs-field { height: 50px; border-right: none; border-bottom: 1px solid oklch(0.92 0.002 0); border-radius: 10px; background: oklch(0.97 0.001 0); }
+          .gd-hero-search { flex-direction: column; align-items: stretch; height: auto; border-radius: 20px; padding: 12px; gap: 10px; }
+          .gd-hs-field { width: 100%; height: 60px; border-right: none; border-bottom: 1px solid oklch(0.92 0.002 0); border-radius: 12px; background: oklch(0.975 0.001 0); padding: 0 18px; }
           .gd-hs-field:last-of-type { border-bottom: none; }
-          .gd-hs-btn { width: 100%; height: 46px; border-radius: 10px; justify-content: center; margin: 0; }
+          .gd-hs-btn { width: 100%; height: 54px; border-radius: 12px; justify-content: center; margin: 4px 0 0; }
           .gd-hero-stats { grid-template-columns: 1fr; }
           .gd-section { padding: 0 16px; }
           .gd-trust-strip { padding: 0 16px; }
