@@ -9,155 +9,125 @@ const RAW_DATA = [
   // 🇰🇪 Kenya
   { 
     name: "Brian Otieno", stay: "Cozy Westlands Studio", country: "Kenya", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop"
   },
   { 
     name: "Mercy Wanjiku", stay: "Mama Njeri’s Kitchen", country: "Kenya", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1531123897727-8f129e16fd3c?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop"
   },
   { 
     name: "Kevin Kiptoo", stay: "Diani Palm Breeze Villa", country: "Kenya", category: "Villa",
-    img: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=400&h=300&fit=crop"
   },
   { 
     name: "Faith Achieng", stay: "Lavington Modern Loft", country: "Kenya", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop"
   },
   { 
     name: "Daniel Mwangi", stay: "Savannah Flame Grill", country: "Kenya", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=300&fit=crop"
   },
   { 
     name: "Sharon Chebet", stay: "Kilifi Sunset Villa", country: "Kenya", category: "Villa",
-    img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&h=300&fit=crop"
   },
   { 
     name: "James Onyango", stay: "Kileleshwa Skyline Apartment", country: "Kenya", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop"
   },
   { 
     name: "Lucy Njeri", stay: "Swahili Spice House", country: "Kenya", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&h=300&fit=crop"
   },
   { 
     name: "Collins Ochieng", stay: "Nyali Ocean View Villa", country: "Kenya", category: "Villa",
-    img: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=400&h=300&fit=crop"
   },
   { 
     name: "Esther Jepchirchir", stay: "Naivasha Lakeview Cabin", country: "Kenya", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=400&h=300&fit=crop"
   },
   { 
     name: "Peter Kamau", stay: "Nairobi Bites Hub", country: "Kenya", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop"
   },
   { 
     name: "Grace Atieno", stay: "Karen Luxury Retreat", country: "Kenya", category: "Villa",
-    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&h=300&fit=crop"
   },
   { 
     name: "Joseph Mutua", stay: "Nanyuki Mountain Escape", country: "Kenya", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=400&h=300&fit=crop"
   },
   { 
     name: "Irene Wairimu", stay: "Karibu Coastal Dine", country: "Kenya", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1554672406-95ca9d83df21?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1554672406-95ca9d83df21?w=400&h=300&fit=crop"
   },
   { 
     name: "Samuel Kipchoge", stay: "Watamu Coral Villa", country: "Kenya", category: "Villa",
-    img: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=400&h=300&fit=crop"
   },
 
   // 🇿🇦 South Africa
   { 
     name: "Thabo Mokoena", stay: "Cape Town City Loft", country: "South Africa", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1536376074432-8bad41d5079a?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1536376074432-8bad41d5079a?w=400&h=300&fit=crop"
   },
   { 
     name: "Lerato Dlamini", stay: "Cape Flame Kitchen", country: "South Africa", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1531123897727-8f129e16fd3c?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=300&fit=crop"
   },
   { 
     name: "Sipho Nkosi", stay: "Cape Town Ocean Bliss Villa", country: "South Africa", category: "Villa",
-    img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=400&h=300&fit=crop"
   },
   { 
     name: "Nomsa Khumalo", stay: "Johannesburg Executive Suite", country: "South Africa", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop"
   },
   { 
     name: "Themba Zulu", stay: "Jozi Urban Grill", country: "South Africa", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&h=300&fit=crop"
   },
   { 
     name: "Naledi Molefe", stay: "Stellenbosch Vineyard Villa", country: "South Africa", category: "Villa",
-    img: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=400&h=300&fit=crop"
   },
   { 
     name: "Kabelo Ndlovu", stay: "Pretoria Garden Apartment", country: "South Africa", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop"
   },
   { 
     name: "Zanele Sithole", stay: "Durban Spice Route", country: "South Africa", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop"
   },
   { 
     name: "Sibusiso Mthembu", stay: "Durban Beachfront Villa", country: "South Africa", category: "Villa",
-    img: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=300&fit=crop"
   },
   { 
     name: "Ayanda Buthelezi", stay: "Durban Sea Breeze Studio", country: "South Africa", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1531123897727-8f129e16fd3c?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop"
   },
   { 
     name: "Bongani Cele", stay: "Soweto Street Bites", country: "South Africa", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=300&fit=crop"
   },
   { 
     name: "Nandi Zungu", stay: "Sandton Elite Residence", country: "South Africa", category: "Villa",
-    img: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400&h=300&fit=crop"
   },
   { 
     name: "Tshepo Masemola", stay: "Port Elizabeth Cozy Stay", country: "South Africa", category: "Airbnb",
-    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop"
   },
   { 
     name: "Lindiwe Nkomo", stay: "Table Mountain Dine", country: "South Africa", category: "Restaurant",
-    img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&h=300&fit=crop"
   },
   { 
     name: "Mandla Shabalala", stay: "Knysna Lagoon Villa", country: "South Africa", category: "Villa",
-    img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&h=300&fit=crop",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=facearea&facepad=2"
+    img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=400&h=300&fit=crop"
   },
 ];
 
@@ -176,13 +146,12 @@ const generateNotifications = () => {
 };
 
 interface BookingData {
-  name: string;
   stay: string;
+  name: string | React.ReactNode;
   city: string;
   country: string;
   time: string;
   image: string;
-  avatar: string;
 }
 
 const NOTIFICATION_SOUND_URL = '/mixkit-correct-answer-tone-2870.wav';
@@ -326,17 +295,8 @@ export default function RecentBookingPopup() {
         }
         .rb-img-main img { width: 100%; height: 100%; object-fit: cover; }
 
-        .rb-avatar-overlay {
-          position: absolute;
-          bottom: -4px; right: -4px;
-          width: 28px; height: 28px;
-          border-radius: 50%;
-          border: 2px solid var(--card);
-          overflow: hidden;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-          background: var(--card);
-        }
-        .rb-avatar-overlay img { width: 100%; height: 100%; object-fit: cover; }
+        .rb-img-main img { width: 100%; height: 100%; object-fit: cover; }
+
 
         .rb-content {
           flex: 1; min-width: 0;
@@ -435,13 +395,6 @@ export default function RecentBookingPopup() {
                 src={current.image} 
                 alt={current.stay} 
                 onError={(e: any) => e.target.src = 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400'} 
-              />
-            </div>
-            <div className="rb-avatar-overlay">
-              <img 
-                src={current.avatar} 
-                alt={current.name} 
-                onError={(e: any) => e.target.src = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100'} 
               />
             </div>
           </div>
