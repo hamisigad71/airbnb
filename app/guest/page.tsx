@@ -1405,12 +1405,31 @@ export default function GuestHome() {
           .gd-hero-content { bottom: 380px !important; }
           .gd-search-label { font-size: 12px; }
           .gd-search-meta { display: none; }
-          .gd-grid { grid-template-columns: 1fr; }
+          .gd-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
           .gd-trust-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
           .gd-hero-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
           .gd-offer { width: 270px; }
           .gd-dest { width: 150px; }
           .gd-dest-img-wrap { width: 150px; height: 100px; }
+
+          /* 2-col card adjustments */
+          .gd-card          { border-radius: 14px; }
+          .gd-card-img-wrap { height: 130px; }
+          .gd-card-body     { padding: 10px 10px 12px; gap: 6px; }
+          .gd-card-title    { font-size: 0.78rem; }
+          .gd-card-loc      { font-size: 0.66rem; }
+          .gd-card-price    { font-size: 0.92rem; }
+          .gd-card-price span { font-size: 0.62rem; }
+          .gd-card-reviews  { font-size: 0.62rem; }
+          .gd-card-foot     { padding-top: 8px; }
+          .gd-card-badge    { font-size: 0.54rem; padding: 3px 8px; bottom: 8px; left: 8px; }
+          .gd-card-price-tag { font-size: 0.72rem; padding: 4px 9px; top: 8px; left: 8px; }
+          .gd-card-price-tag span { font-size: 0.58rem; }
+          .gd-rating        { font-size: 0.68rem; padding: 2px 7px; }
+          .gd-like          { width: 28px; height: 28px; top: 8px; right: 8px; }
+          .gd-card-amenities { display: none; }
+          .gd-chip-row      { display: none; }
+          .gd-popular-badge { font-size: 0.54rem; padding: 3px 7px; }
         }
         
         .gd-carousel-btn {

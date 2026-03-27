@@ -311,6 +311,12 @@ export default function ListingsIndexPage() {
           grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
           gap: 24px;
         }
+        @media (max-width: 480px) {
+          .li-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+          }
+        }
 
         /* ── Card ── */
         .li-card {
@@ -618,6 +624,55 @@ export default function ListingsIndexPage() {
         /* ══ Responsive ══ */
         @media (max-width: 480px) {
           .li-card-amenities { display: none; }
+
+          /* Search bar */
+          .li-search-input  { font-size: 0.78rem; height: 42px; }
+          .li-bar-btn       { font-size: 0.75rem; height: 42px; padding: 0 12px; gap: 5px; }
+          .li-map-btn       { font-size: 0.75rem; height: 42px; padding: 0 14px; }
+          .li-bar-inner     { padding: 0 14px; }
+          .li-search-row    { gap: 7px; margin-bottom: 10px; }
+
+          /* Category pills */
+          .li-cat           { font-size: 0.72rem; padding: 6px 12px; }
+          .li-cat-icon      { font-size: 0.88rem; }
+
+          /* Page body */
+          .li-body          { padding: 20px 14px; }
+
+          /* Results header */
+          .li-results-title { font-size: 1.05rem; }
+          .li-results-count { font-size: 0.74rem; }
+
+          /* Sort */
+          .li-sort-btn      { font-size: 0.74rem; padding: 7px 12px; }
+          .li-sort-opt      { font-size: 0.76rem; padding: 9px 14px; }
+
+          /* Cards — 2-column layout */
+          .li-card          { border-radius: 14px; }
+          .li-card-body     { padding: 8px 10px 10px; }
+          .li-card-title    { font-size: 0.76rem; -webkit-line-clamp: 2; }
+          .li-card-loc      { font-size: 0.64rem; margin-bottom: 8px; }
+          .li-card-price    { font-size: 0.9rem; }
+          .li-card-price span { font-size: 0.6rem; }
+          .li-card-reviews  { font-size: 0.6rem; }
+          .li-card-cta      { font-size: 0.62rem; padding: 4px 8px; }
+          .li-card-foot     { padding-top: 8px; }
+          .li-type          { font-size: 0.56rem; padding: 3px 7px; bottom: 8px; left: 8px; }
+          .li-rating        { font-size: 0.64rem; padding: 3px 7px; bottom: 8px; right: 8px; }
+          .li-like          { width: 28px; height: 28px; top: 8px; right: 8px; }
+
+          /* Empty state */
+          .li-empty-title   { font-size: 1rem; }
+          .li-empty-desc    { font-size: 0.78rem; }
+          .li-empty-btn     { font-size: 0.78rem; padding: 9px 22px; }
+
+          /* Filter modal */
+          .li-modal-title   { font-size: 0.95rem; }
+          .li-filter-label  { font-size: 0.62rem; }
+          .li-price-input   { font-size: 0.78rem; }
+          .li-star-btn      { font-size: 0.72rem; }
+          .li-modal-reset   { font-size: 0.78rem; padding: 10px 14px; }
+          .li-modal-apply   { font-size: 0.82rem; }
         }
       `}</style>
 

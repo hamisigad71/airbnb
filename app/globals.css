@@ -120,3 +120,138 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ══════════════════════════════════════════════════════════
+   GLOBAL MOBILE FONT SCALING  (≤ 480px)
+   Covers every page prefix in the project:
+   gd- (guest home)  ·  hd- (host)  ·  gp- (guest profile)
+   li- (listings)    ·  bk- (bookings)  ·  ss- (saved stays)
+══════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  /* ── Base type scale — clamp() values auto-scale with this ── */
+  html { font-size: 15px; }
+
+  /* ─── GUEST HOME (.gd-) ─── */
+  .gd-hero-sub         { font-size: 12px; }
+  .gd-hero-eyebrow     { font-size: 10px; }
+  .gd-stat-val         { font-size: 1.45rem; }
+  .gd-stat-lbl         { font-size: 0.68rem; }
+  .gd-stat-trend       { font-size: 0.65rem; }
+  .gd-ttl              { font-size: 1.1rem; }
+  .gd-see-all          { font-size: 0.72rem; }
+  .gd-offer-title      { font-size: 1rem; }
+  .gd-offer-desc       { font-size: 0.76rem; }
+  .gd-offer-badge      { font-size: 0.6rem; }
+  .gd-offer-cta        { font-size: 0.73rem; }
+  .gd-dest-city        { font-size: 0.78rem; }
+  .gd-dest-country     { font-size: 0.65rem; }
+  .gd-dest-count       { font-size: 0.58rem; }
+  .gd-trust-card-label { font-size: 0.76rem; }
+  .gd-trust-card-sub   { font-size: 0.65rem; }
+  .gd-bb-title         { font-size: 0.82rem; }
+  .gd-bb-sub           { font-size: 0.7rem; }
+  .gd-search-label     { font-size: 11px; }
+  .gd-search-meta      { font-size: 10px; }
+  .gd-sf-label         { font-size: 8px; }
+  .gd-sf-input         { font-size: 11px; }
+  .gd-search-submit    { font-size: 12px; padding: 10px 16px; }
+  .gd-trust-item       { font-size: 10px; }
+  .gd-section          { padding: 0 16px; }
+  .gd-hero-stats-wrap  { padding: 0 16px; }
+  .gd-trust-strip      { padding: 0 16px; }
+  .gd-review-title     { font-size: 11px; }
+  .gd-review-sub       { font-size: 9px; }
+
+  /* ─── HOST DASHBOARD (.hd-) ─── */
+  .hd-page-title    { font-size: 1.5rem; }
+  .hd-page-sub      { font-size: 0.78rem; }
+  .hd-eyebrow       { font-size: 0.62rem; }
+  .hd-stat-val      { font-size: 1.55rem; }
+  .hd-stat-lbl      { font-size: 0.68rem; }
+  .hd-stat-trend    { font-size: 0.62rem; }
+  .hd-ttl           { font-size: 1rem; }
+  .hd-see-all       { font-size: 0.72rem; }
+  .hd-btn           { font-size: 0.78rem; padding: 9px 16px; }
+  .hd-tab           { font-size: 0.74rem; padding: 7px 12px; }
+  .hd-booking-name  { font-size: 0.82rem; }
+  .hd-booking-dates { font-size: 0.66rem; }
+  .hd-booking-price { font-size: 0.84rem; }
+  .hd-status-pill   { font-size: 0.6rem; }
+  .hd-bd-label      { font-size: 0.58rem; }
+  .hd-bd-val        { font-size: 0.76rem; }
+  .hd-ba-btn        { font-size: 0.68rem; padding: 6px 10px; }
+  .hd-listing-title { font-size: 0.78rem; }
+  .hd-listing-meta  { font-size: 0.64rem; }
+  .hd-listing-price { font-size: 0.78rem; }
+  .hd-listing-active { font-size: 0.58rem; }
+  .hd-notif-text    { font-size: 0.74rem; }
+  .hd-notif-time    { font-size: 0.62rem; }
+  .hd-perf-label    { font-size: 0.72rem; }
+  .hd-perf-val      { font-size: 0.72rem; }
+  .hd-rev-eyebrow   { font-size: 0.6rem; }
+  .hd-rev-val       { font-size: 1.8rem; }
+  .hd-rev-sub       { font-size: 0.72rem; }
+  .hd-rev-meta-val  { font-size: 0.95rem; }
+  .hd-rev-meta-lbl  { font-size: 0.62rem; }
+  .hd-rev-cta       { font-size: 0.74rem; }
+  .hd-qa-title      { font-size: 0.76rem; }
+  .hd-qa-sub        { font-size: 0.62rem; }
+  .hd-tip-title     { font-size: 0.74rem; }
+  .hd-tip-sub       { font-size: 0.65rem; }
+  .hd-cal-day       { font-size: 0.62rem; }
+
+  /* ─── GUEST PROFILE (.gp-) ─── */
+  .gp-page-title   { font-size: 1.5rem; }
+  .gp-page-sub     { font-size: 0.78rem; }
+  .gp-breadcrumb   { font-size: 0.68rem; }
+  .gp-avatar-name  { font-size: 0.94rem; }
+  .gp-avatar-email { font-size: 0.7rem; }
+  .gp-stat-icon    { font-size: 1.1rem; }
+  .gp-stat-val     { font-size: 1.2rem; }
+  .gp-stat-label   { font-size: 0.62rem; }
+  .gp-social-lbl   { font-size: 0.74rem; }
+  .gp-nav-btn      { font-size: 0.82rem; }
+  .gp-panel-title  { font-size: 1.05rem; }
+  .gp-panel-sub    { font-size: 0.74rem; }
+  .gp-toggle-lbl   { font-size: 0.82rem; }
+  .gp-toggle-sub   { font-size: 0.68rem; }
+  .gp-status-title { font-size: 0.82rem; }
+  .gp-status-sub   { font-size: 0.7rem; }
+  .gp-danger-title { font-size: 0.78rem; }
+  .gp-danger-sub   { font-size: 0.7rem; }
+
+  /* ─── BOOKINGS (.bk-) ─── */
+  .bk-title         { font-size: 1.6rem; }
+  .bk-subtitle      { font-size: 0.78rem; }
+  .bk-eyebrow       { font-size: 0.62rem; }
+  .bk-sum-val       { font-size: 1.3rem; }
+  .bk-sum-lbl       { font-size: 0.65rem; }
+  .bk-tab           { font-size: 0.74rem; padding: 8px 14px; }
+  .bk-card-title    { font-size: 0.88rem; }
+  .bk-card-loc      { font-size: 0.7rem; }
+  .bk-price-label   { font-size: 0.65rem; }
+  .bk-price-val     { font-size: 1rem; }
+  .bk-date-label    { font-size: 0.62rem; }
+  .bk-date-val      { font-size: 0.78rem; }
+  .bk-ref           { font-size: 0.68rem; }
+  .bk-btn-primary   { font-size: 0.78rem; padding: 9px 14px; }
+  .bk-btn-secondary { font-size: 0.78rem; padding: 9px 14px; }
+  .bk-btn-ghost     { font-size: 0.74rem; }
+  .bk-empty-title   { font-size: 1rem; }
+  .bk-empty-desc    { font-size: 0.76rem; }
+  .bk-status        { font-size: 0.62rem; }
+
+  /* ─── SAVED STAYS (.ss-) ─── */
+  .ss-title            { font-size: 1.6rem; }
+  .ss-subtitle         { font-size: 0.76rem; }
+  .ss-count-pill       { font-size: 0.68rem; }
+  .ss-card-title       { font-size: 0.84rem; }
+  .ss-card-loc         { font-size: 0.68rem; }
+  .ss-card-rating      { font-size: 0.7rem; }
+  .ss-card-type        { font-size: 0.6rem; }
+  .ss-card-price-hover { font-size: 0.72rem; }
+  .ss-list-type        { font-size: 0.6rem; }
+  .ss-empty-btn        { font-size: 0.78rem; }
+  .ss-view-btn         { font-size: 0.72rem; }
+}
