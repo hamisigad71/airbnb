@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Search, Send, Check, CheckCheck, MoreVertical, Paperclip, Phone, Video, ChevronLeft } from 'lucide-react';
+import { Search, Send, Check, CheckCheck, MoreVertical, Paperclip, Phone, Video, ChevronLeft, MessageSquare } from 'lucide-react';
 import { MOCK_USERS, MOCK_LISTINGS } from '@/lib/mock-data';
-import { Header } from '@/components/navigation/guest-header';
 import Link from 'next/link';
 
 export default function GuestInboxPage() {
@@ -57,20 +56,20 @@ export default function GuestInboxPage() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-[oklch(0.99_0.001_0)]">
-      <Header title="Inbox" />
+    <div className="h-screen flex flex-col bg-[var(--background)]">
+      
       
       <main className="flex-1 flex overflow-hidden max-w-[1600px] mx-auto w-full">
         {/* Conversations Sidebar */}
-        <aside className={`${isMobileListVisible ? 'flex' : 'hidden'} md:flex flex-col w-full md:w-[380px] border-r border-[oklch(0.92_0.002_0)] bg-white z-20`}>
+        <aside className={`${isMobileListVisible ? 'flex' : 'hidden'} md:flex flex-col w-full md:w-[380px] border-r border-[var(--border)] bg-[var(--card)] z-20`}>
           <div className="p-6">
-            <h1 className="text-2xl font-black text-[oklch(0.1_0.001_0)] mb-6">Messages</h1>
+            <h1 className="text-2xl font-black text-[var(--foreground)] mb-6">Messages</h1>
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[oklch(0.55_0.005_0)]" size={18} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--muted-foreground)]" size={18} />
               <input 
                 type="text" 
                 placeholder="Search messages..."
-                className="w-full bg-[oklch(0.96_0.002_0)] border-none rounded-2xl py-3.5 pl-12 pr-4 font-medium text-sm focus:ring-2 focus:ring-[oklch(0.4_0.155_11.87)] transition-all"
+                className="w-full bg-[var(--background)] border-none rounded-2xl py-3.5 pl-12 pr-4 font-medium text-sm focus:ring-2 focus:ring-[oklch(0.4_0.155_11.87)] transition-all"
               />
             </div>
           </div>
@@ -84,20 +83,20 @@ export default function GuestInboxPage() {
                   setIsMobileListVisible(false);
                 }}
                 className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all duration-300 ${
-                  activeChat === chat.id ? 'bg-[oklch(0.95_0.03_11.87)]' : 'hover:bg-[oklch(0.98_0.001_0)]'
+                  activeChat === chat.id ? 'bg-[oklch(0.4_0.155_11.87/0.1)]' : 'hover:bg-[oklch(0.4_0.155_11.87/0.04)]'
                 }`}
               >
                 <div className="relative">
-                  <img src={chat.avatar} alt={chat.name} className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm" />
-                  {chat.online && <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white" />}
+                  <img src={chat.avatar} alt={chat.name} className="w-14 h-14 rounded-full object-cover border-2 border-[var(--card)] shadow-sm" />
+                  {chat.online && <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-green-500 border-2 border-[var(--card)]" />}
                 </div>
                 <div className="flex-1 text-left overflow-hidden">
                   <div className="flex justify-between items-center mb-1">
-                    <h3 className="font-bold text-[oklch(0.1_0.001_0)] truncate">{chat.name}</h3>
-                    <span className="text-[10px] font-bold text-[oklch(0.55_0.005_0)]">{chat.time}</span>
+                    <h3 className="font-bold text-[var(--foreground)] truncate">{chat.name}</h3>
+                    <span className="text-[10px] font-bold text-[var(--muted-foreground)]">{chat.time}</span>
                   </div>
                   <p className="text-xs font-semibold text-[oklch(0.4_0.155_11.87)] mb-0.5 truncate">{chat.listing}</p>
-                  <p className="text-xs font-medium text-[oklch(0.55_0.005_0)] truncate">{chat.lastMessage}</p>
+                  <p className="text-xs font-medium text-[var(--muted-foreground)] truncate">{chat.lastMessage}</p>
                 </div>
                 {chat.unread > 0 && (
                   <div className="w-6 h-6 rounded-full bg-[oklch(0.4_0.155_11.87)] text-white text-[10px] font-black flex items-center justify-center">
@@ -110,11 +109,11 @@ export default function GuestInboxPage() {
         </aside>
 
         {/* Chat Area */}
-        <section className={`${!isMobileListVisible ? 'flex' : 'hidden'} md:flex flex-col flex-1 bg-[oklch(0.99_0.001_0)] relative`}>
+        <section className={`${!isMobileListVisible ? 'flex' : 'hidden'} md:flex flex-col flex-1 bg-[var(--background)] relative`}>
           {activeChat ? (
             <>
               {/* Chat Header */}
-              <header className="h-20 border-b border-[oklch(0.92_0.002_0)] bg-white/80 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-10">
+              <header className="h-20 border-b border-[var(--border)] bg-[var(--card)]/80 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-10">
                 <div className="flex items-center gap-4">
                   <button onClick={() => setIsMobileListVisible(true)} className="md:hidden p-2 rounded-xl hover:bg-black/5">
                     <ChevronLeft size={20} />
@@ -122,7 +121,7 @@ export default function GuestInboxPage() {
                   <div className="flex items-center gap-3">
                     <img src={currentChatUser?.avatar} alt={currentChatUser?.name} className="w-10 h-10 rounded-full object-cover" />
                     <div>
-                      <h2 className="font-bold text-[oklch(0.1_0.001_0)] leading-tight">{currentChatUser?.name}</h2>
+                      <h2 className="font-bold text-[var(--foreground)] leading-tight">{currentChatUser?.name}</h2>
                       <div className="flex items-center gap-1.5">
                         <div className="w-2 h-2 rounded-full bg-green-500" />
                         <span className="text-[10px] font-bold text-green-600 uppercase tracking-tighter">Online</span>
@@ -131,13 +130,7 @@ export default function GuestInboxPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button className="p-2.5 rounded-xl hover:bg-[oklch(0.96_0.002_0)] text-[oklch(0.55_0.005_0)] transition-colors">
-                    <Phone size={20} />
-                  </button>
-                  <button className="p-2.5 rounded-xl hover:bg-[oklch(0.96_0.002_0)] text-[oklch(0.55_0.005_0)] transition-colors">
-                    <Video size={20} />
-                  </button>
-                  <button className="p-2.5 rounded-xl hover:bg-[oklch(0.96_0.002_0)] text-[oklch(0.55_0.005_0)] transition-colors">
+                  <button className="p-2.5 rounded-xl hover:bg-[oklch(0.4_0.155_11.87/0.1)] text-[var(--muted-foreground)] transition-colors">
                     <MoreVertical size={20} />
                   </button>
                 </div>
@@ -146,7 +139,7 @@ export default function GuestInboxPage() {
               {/* Message List */}
               <div className="flex-1 overflow-y-auto p-6 space-y-6">
                 <div className="flex justify-center mb-8">
-                  <span className="bg-[oklch(0.92_0.002_0)] text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full text-[oklch(0.55_0.005_0)]">
+                  <span className="bg-[var(--border)] text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full text-[var(--muted-foreground)]">
                     April 15, 2024
                   </span>
                 </div>
@@ -157,12 +150,12 @@ export default function GuestInboxPage() {
                       <div className={`px-5 py-3.5 rounded-3xl font-medium text-sm shadow-sm ${
                         msg.sender === 'guest' 
                           ? 'bg-[oklch(0.4_0.155_11.87)] text-white rounded-br-none' 
-                          : 'bg-white text-[oklch(0.1_0.001_0)] rounded-bl-none border border-[oklch(0.95_0.002_0)]'
+                          : 'bg-[var(--card)] text-[var(--foreground)] rounded-bl-none border border-[var(--border)]'
                       }`}>
                         {msg.text}
                       </div>
                       <div className="flex items-center gap-1.5 px-2">
-                        <span className="text-[10px] font-bold text-[oklch(0.55_0.005_0)]">{msg.time}</span>
+                        <span className="text-[10px] font-bold text-[var(--muted-foreground)]">{msg.time}</span>
                         {msg.sender === 'guest' && <CheckCheck size={12} className="text-[oklch(0.4_0.155_11.87)]" />}
                       </div>
                     </div>
@@ -171,9 +164,9 @@ export default function GuestInboxPage() {
               </div>
 
               {/* Chat Input */}
-              <footer className="p-6 bg-white border-t border-[oklch(0.92_0.002_0)]">
-                <div className="flex items-center gap-3 bg-[oklch(0.96_0.002_0)] p-2 rounded-2xl border-2 border-transparent focus-within:border-[oklch(0.4_0.155_11.87)] transition-all">
-                  <button className="p-2.5 rounded-xl hover:bg-white text-[oklch(0.55_0.005_0)] transition-all">
+              <footer className="p-6 bg-[var(--card)] border-t border-[var(--border)]">
+                <div className="flex items-center gap-3 bg-[var(--background)] p-2 rounded-2xl border-2 border-transparent focus-within:border-[oklch(0.4_0.155_11.87)] transition-all">
+                  <button className="p-2.5 rounded-xl hover:bg-[var(--card)] text-[var(--muted-foreground)] transition-all">
                     <Paperclip size={20} />
                   </button>
                   <input 
@@ -196,11 +189,11 @@ export default function GuestInboxPage() {
             </>
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center p-12 text-center">
-              <div className="w-24 h-24 bg-[oklch(0.96_0.002_0)] rounded-[32px] flex items-center justify-center text-[oklch(0.55_0.005_0)] mb-8">
+              <div className="w-24 h-24 bg-[var(--muted)] rounded-[32px] flex items-center justify-center text-[var(--muted-foreground)] mb-8">
                 <MessageSquare size={40} />
               </div>
-              <h2 className="text-2xl font-black text-[oklch(0.1_0.001_0)] mb-3">Your Inbox</h2>
-              <p className="text-[oklch(0.55_0.005_0)] font-medium max-w-xs leading-relaxed">
+              <h2 className="text-2xl font-black text-[var(--foreground)] mb-3">Your Inbox</h2>
+              <p className="text-[var(--muted-foreground)] font-medium max-w-xs leading-relaxed">
                 Connect with hosts, ask questions, and finalize your travel plans all in one place.
               </p>
             </div>
@@ -211,8 +204,8 @@ export default function GuestInboxPage() {
       <style jsx global>{`
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: oklch(0.9_0.002_0); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: oklch(0.85_0.002_0); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--muted-foreground); }
       `}</style>
     </div>
   );

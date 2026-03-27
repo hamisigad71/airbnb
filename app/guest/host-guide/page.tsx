@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { BookOpen, Search, ChevronRight, PenTool, ShieldCheck, HelpCircle, MessageCircle, ArrowLeft, Lightbulb, MapPin, Camera } from 'lucide-react';
-import { Header } from '@/components/navigation/guest-header';
 import BottomNav from '@/components/navigation/bottom-nav';
 
 export default function HostGuidePage() {
@@ -16,7 +15,7 @@ export default function HostGuidePage() {
 
   return (
     <div className="min-h-screen bg-[oklch(0.99_0.001_0)] pb-32">
-      <Header title="Host Guide" />
+      
 
       <main className="max-w-6xl mx-auto px-6 pt-16">
         {/* Hero Section */}

@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 
 import InitialLoaderWrapper from '@/components/shared/loader/initial-loader-wrapper'
 import BottomNav from '@/components/navigation/bottom-nav'
+import { ThemeProvider } from '@/components/shared/theme-provider'
 
 export default function RootLayout({
   children,
@@ -33,10 +34,12 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans antialiased" suppressHydrationWarning>
         <SessionProvider>
-          <InitialLoaderWrapper>
-            {children}
-            <BottomNav />
-          </InitialLoaderWrapper>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <InitialLoaderWrapper>
+              {children}
+              <BottomNav />
+            </InitialLoaderWrapper>
+          </ThemeProvider>
         </SessionProvider>
         <Analytics />
       </body>

@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Gift, Sparkles, Send, CreditCard, Heart, ArrowRight, GiftIcon, Info, ChevronRight } from 'lucide-react';
-import { Header } from '@/components/navigation/guest-header';
 import BottomNav from '@/components/navigation/bottom-nav';
 
 export default function GiftCardsPage() {
@@ -16,7 +15,7 @@ export default function GiftCardsPage() {
 
   return (
     <div className="min-h-screen bg-[oklch(0.99_0.001_0)] pb-32">
-      <Header title="Gift Cards" />
+      
 
       <main className="max-w-6xl mx-auto px-6 pt-16">
         <div className="bg-gradient-to-br from-[oklch(0.1_0.001_0)] to-[oklch(0.2_0.001_0)] rounded-[64px] p-20 text-white text-center relative overflow-hidden mb-24">

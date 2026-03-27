@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Sparkles, MapPin, Star, Calendar, ArrowRight, Camera, Utensils, Waves, Mountain } from 'lucide-react';
-import { Header } from '@/components/navigation/guest-header';
 import BottomNav from '@/components/navigation/bottom-nav';
 
 export default function ExperiencesPage() {
@@ -16,7 +15,6 @@ export default function ExperiencesPage() {
 
   return (
     <div className="min-h-screen bg-[oklch(0.99_0.001_0)] pb-32">
-      <Header title="Experiences" />
 
       <main className="max-w-7xl mx-auto px-6 pt-16">
         <header className="mb-16">

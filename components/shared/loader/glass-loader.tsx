@@ -15,7 +15,7 @@ export default function GlassLoader() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(255, 255, 255, 0.15);
+          background: color-mix(in oklch, var(--background) 15%, transparent);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           z-index: 99999;
@@ -88,10 +88,10 @@ export default function GlassLoader() {
           width: 272px;
           padding: 48px 38px 42px;
           border-radius: 30px;
-          background: rgba(255, 255, 255, 0.35);
+          background: color-mix(in oklch, var(--card) 35%, transparent);
           backdrop-filter: blur(32px) saturate(1.8);
           -webkit-backdrop-filter: blur(32px) saturate(1.8);
-          border: 1px solid rgba(255, 255, 255, 0.6);
+          border: 1px solid color-mix(in oklch, var(--border) 60%, transparent);
           box-shadow:
             0 2px 0 rgba(255, 255, 255, 0.7) inset,
             0 -1px 0 rgba(0, 0, 0, 0.04) inset,
@@ -301,7 +301,7 @@ export default function GlassLoader() {
           font-family: var(--font-sans), system-ui, sans-serif;
           font-size: 1.6rem;
           font-weight: 600;
-          color: #1a0a08;
+          color: var(--foreground);
           letter-spacing: 0.04em;
           margin-bottom: 5px;
           animation: fadeSlideUp 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -317,7 +317,7 @@ export default function GlassLoader() {
           font-family: var(--font-sans), system-ui, sans-serif;
           font-size: 0.72rem;
           font-weight: 500;
-          color: rgba(26, 10, 8, 0.42);
+          color: var(--muted-foreground);
           letter-spacing: 0.14em;
           text-transform: uppercase;
           margin-bottom: 30px;
@@ -373,7 +373,7 @@ export default function GlassLoader() {
         .loader-status {
           font-family: var(--font-sans), system-ui, sans-serif;
           font-size: 0.78rem;
-          color: rgba(26, 10, 8, 0.38);
+          color: var(--muted-foreground);
           font-weight: 500;
           letter-spacing: 0.04em;
           display: flex;

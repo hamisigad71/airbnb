@@ -111,16 +111,16 @@ export default function HeroCarousel({
         .hc-root {
           --p:      oklch(0.4 0.155 11.87);
           --p-l:    oklch(0.6 0.155 11.87);
-          --p-pale: oklch(0.96 0.03  11.87);
-          --p-ring: oklch(0.4 0.155 11.87 / 0.13);
-          --fg:     oklch(0.1  0.001 0);
-          --muted:  oklch(0.52 0.006 0);
-          --subtle: oklch(0.68 0.004 0);
-          --border: oklch(0.9  0.002 0);
-          --card:   oklch(1    0     0);
-          --bg:     oklch(0.985 0.001 0);
-          --sh-m:   0 8px 32px  oklch(0.4 0.155 11.87 / 0.12);
-          --sh-l:   0 20px 60px oklch(0.4 0.155 11.87 / 0.16);
+          --p-pale: var(--p-pale, oklch(0.96 0.03  11.87));
+          --p-ring: var(--p-ring, oklch(0.4 0.155 11.87 / 0.13));
+          --fg:     var(--foreground);
+          --muted:  var(--muted-foreground);
+          --subtle: var(--muted-foreground);
+          --border: var(--border);
+          --card:   var(--card);
+          --bg:     var(--background);
+          --sh-m:   0 8px 32px  rgba(0,0,0,0.08);
+          --sh-l:   0 20px 60px rgba(0,0,0,0.12);
           position: relative;
           width: 100%;
           font-family: var(--font-sans), system-ui, sans-serif;

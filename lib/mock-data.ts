@@ -287,7 +287,7 @@ export const MOCK_LISTINGS: Listing[] = [
   },
   {
     id: 'listing-12', hostId: 'user-host-1',
-    title: 'Modern Beachfront in Malibu',
+    title: 'Modern Beachfront in Malindi',
     description: 'Glass walls and direct sand access in this architectural jewel.',
     image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=600&h=400&fit=crop',
     images: [
@@ -295,7 +295,7 @@ export const MOCK_LISTINGS: Listing[] = [
       'https://images.unsplash.com/photo-1480074568708-e7...f?w=600&h=400&fit=crop',
       'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop'
     ],
-    location: 'Malibu Rd', city: 'Malibu', country: 'USA',
+    location: 'Malindi Rd', city: 'Malindi', country: 'USA',
     lat: 34.025, lng: -118.776, pricePerNight: 1200, maxGuests: 8, bedrooms: 4, beds: 4, bathrooms: 4.5,
     amenities: ['Beach Access', 'Hot Tub', 'Sound System', 'Parking'], rating: 4.99, reviews: 19, availability: [], type: 'villa'
   },

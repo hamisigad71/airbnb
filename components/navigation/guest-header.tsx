@@ -3,13 +3,22 @@
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
+import { Sun, Moon } from 'lucide-react';
 import LogoBadge from '@/components/shared/logo-badge';
 
 export function Header({ title }: { title?: string }) {
   const { data: session } = useSession();
+  const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Avoid hydration mismatch by waiting for mount
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const userName = session?.user?.name || 'Guest';
   const userInitials = userName
@@ -47,13 +56,18 @@ export function Header({ title }: { title?: string }) {
       <style>{`
         /* ── Design tokens (mirrors landing page) ── */
         .app-header {
-          --h-p:       oklch(0.4 0.155 11.87);
-          --h-p-pale:  oklch(0.95 0.03 11.87);
-          --h-bg:      oklch(0.99 0.001 0);
-          --h-fg:      oklch(0.1 0.001 0);
-          --h-muted:   oklch(0.55 0.005 0);
-          --h-border:  oklch(0.88 0.002 0);
-          --h-shadow:  oklch(0.4 0.155 11.87 / 0.08);
+          --h-p:       var(--primary);
+          --h-p-pale:  var(--muted);
+          --h-bg:      var(--background);
+          --h-fg:      var(--foreground);
+          --h-muted:   var(--muted-foreground);
+          --h-border:  var(--border);
+          --h-shadow:  rgba(0,0,0,0.05);
+        }
+
+        .dark .app-header {
+           --h-shadow: rgba(0,0,0,0.3);
+           --h-p-pale: oklch(0.2 0.05 11.87 / 0.5);
         }
 
         /* ── Sticky glassmorphic bar ── */
@@ -440,8 +454,35 @@ export function Header({ title }: { title?: string }) {
             />
           </div>
 
-          {/* User menu (desktop) */}
-          <div style={{ position: 'relative' }}>
+          {/* Theme Toggle & User menu (desktop) */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative' }}>
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="hdr-theme-toggle"
+              aria-label="Toggle theme"
+            >
+              {!mounted ? null : theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+              <style jsx>{`
+                .hdr-theme-toggle {
+                  width: 38px;
+                  height: 38px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border: 1.5px solid var(--h-border);
+                  background: var(--h-bg);
+                  color: var(--h-fg);
+                  cursor: pointer;
+                  transition: all 0.2s;
+                }
+                .hdr-theme-toggle:hover {
+                   background: var(--h-p-pale);
+                   border-color: var(--h-p);
+                   transform: rotate(12deg);
+                }
+              `}</style>
+            </button>
             <button
               className="hdr-user-trigger"
               onClick={() => setMenuOpen((prev) => !prev)}
@@ -540,6 +581,22 @@ export function Header({ title }: { title?: string }) {
               <div className="hdr-mobile-user-name">{userName}</div>
               <div className="hdr-mobile-user-email">{session?.user?.email}</div>
             </div>
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              style={{
+                background: 'var(--h-p-pale)',
+                border: 'none',
+                width: '36px',
+                height: '36px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--h-p)'
+              }}
+            >
+              {!mounted ? null : theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
           </div>
 
           <button
