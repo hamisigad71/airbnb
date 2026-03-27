@@ -63,6 +63,7 @@ export default function GuestHome() {
   const [searchDate, setSearchDate]           = useState('');
   const [searchGuests, setSearchGuests]       = useState('');
   const [visibleCount, setVisibleCount]       = useState(6);
+  const [quickActionsOpen, setQuickActionsOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -1055,11 +1056,59 @@ export default function GuestHome() {
         /* ═══════════════════════════════════════
            QUICK ACTIONS ROW
         ═══════════════════════════════════════ */
-        .gd-quick-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 12px;
+        .gd-quick-trigger {
+          cursor: default;
         }
+        @media (max-width: 767px) {
+          .gd-quick-trigger {
+            cursor: pointer;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+          }
+          .gd-quick-trigger:active { transform: scale(0.98); background: var(--p-pale); }
+          .gd-hdr-icon { width: 32px; height: 32px; border-radius: 8px; }
+          .gd-ttl { font-size: 1rem; font-weight: 700; }
+          
+          .gd-quick-grid.mobile-hide {
+            display: none;
+            opacity: 0;
+            transform: translateY(-8px) scale(0.98);
+            pointer-events: none;
+          }
+          .gd-quick-grid.mobile-show {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            animation: gdQuickFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+            padding: 4px;
+            background: var(--bg2);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            margin-top: -8px;
+            padding-top: 16px;
+          }
+          @keyframes gdQuickFadeIn {
+            from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+          }
+          
+          .gd-quick-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: 16px;
+            animation: gdUp 0.5s cubic-bezier(.22,.68,0,1.12) both;
+          }
+        }
+
         .gd-quick-card {
           padding: 20px;
           background: var(--card);
@@ -1482,55 +1531,17 @@ export default function GuestHome() {
           transform: scale(1.2);
         }
 
-        .gd-rules-dropdown {
-          position: relative;
-          margin-top: 12px;
-          border-top: 1px solid rgba(0,0,0,0.05);
-          padding-top: 12px;
-        }
-        .gd-rules-toggle {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 0.8rem;
-          font-weight: 600;
-          color: var(--p); /* Changed from --primary to --p */
-          background: none;
-          border: none;
-          padding: 0;
-          cursor: pointer;
-          opacity: 0.8;
-          transition: opacity 0.2s;
-        }
-        .gd-rules-toggle:hover {
-          opacity: 1;
-        }
-        .gd-rules-content {
-          margin-top: 8px;
-          background: rgba(0,0,0,0.02);
-          border-radius: 8px;
-          padding: 10px;
-          font-size: 0.75rem;
+        .gd-quick-chevron {
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           color: var(--muted);
-          animation: slideDown 0.3s ease-out;
         }
-        @keyframes slideDown {
-          from { opacity: 0; transform: translateY(-5px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .gd-rule-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 6px;
-          margin-bottom: 4px;
-        }
-        .gd-rule-dot {
-          width: 4px;
-          height: 4px;
-          border-radius: 50%;
-          background: var(--p); /* Changed from --primary to --p */
-          margin-top: 6px;
-          flex-shrink: 0;
+        .gd-quick-chevron.open { transform: rotate(180deg); color: var(--p); }
+
+        .gd-quick-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
       `}</style>
 
@@ -1798,20 +1809,31 @@ export default function GuestHome() {
             QUICK ACTIONS
         ══════════════════════════════════ */}
         <div className="gd-section gd-up gd-d5" style={{ marginTop: 48 }}>
-          <div className="gd-hdr">
+          <div 
+            className="gd-hdr gd-quick-trigger" 
+            onClick={() => setQuickActionsOpen(!quickActionsOpen)}
+          >
             <div className="gd-hdr-left">
               <div className="gd-hdr-icon"><Zap size={16} /></div>
               <h2 className="gd-ttl">Quick Actions</h2>
             </div>
+            <div className={`gd-quick-chevron md:hidden ${quickActionsOpen ? 'open' : ''}`}>
+              <ChevronDown size={20} />
+            </div>
           </div>
-          <div className="gd-quick-grid">
+          <div className={`gd-quick-grid ${quickActionsOpen ? 'mobile-show' : 'mobile-hide'}`}>
             {[
               { icon: <Search size={18}/>,      title:'Search Stays',        sub:'Find your next perfect place',      href:'/guest/listings' },
               { icon: <Calendar size={18}/>,    title:'My Bookings',         sub:'View & manage your reservations',   href:'/guest/bookings' },
               { icon: <Heart size={18}/>,       title:'Saved Stays',         sub:`${liked.size} properties saved`,    href:'/guest/saved' },
               { icon: <MapPin size={18}/>,      title:'Explore Map',         sub:'Browse stays by location',          href:'/guest/map' },
-            ].map(a => (
-              <Link key={a.title} href={a.href} className="gd-quick-card">
+            ].map((a, i) => (
+              <Link 
+                key={a.title} 
+                href={a.href} 
+                className="gd-quick-card"
+                style={{ animationDelay: `${i * 0.08}s` }}
+              >
                 <div className="gd-quick-icon">{a.icon}</div>
                 <div>
                   <div className="gd-quick-title">{a.title}</div>

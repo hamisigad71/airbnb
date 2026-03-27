@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {
   Calendar, MapPin, Users, MessageSquare, ArrowRight,
   Plane, Landmark, History, XCircle, Star, Clock,
-  ChevronRight, Shield, Sparkles, Receipt,
+  ChevronRight, Shield, Sparkles, Receipt, Crown,
 } from 'lucide-react';
 import { MOCK_BOOKINGS, MOCK_LISTINGS } from '@/lib/mock-data';
 import BottomNav from '@/components/navigation/bottom-nav';
@@ -481,6 +481,38 @@ export default function BookingsPage() {
           .bk-tabs-wrap { width: 100%; }
           .bk-tab { flex: 1; justify-content: center; padding: 9px 10px; font-size: 0.8rem; }
           .bk-card-content { padding: 18px; }
+          
+          /* 2-column info cards on phone */
+          .bk-info-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 32px;
+          }
+          .bk-info-card {
+            padding: 20px 16px;
+            border-radius: 18px;
+          }
+          .bk-info-icon {
+            width: 36px;
+            height: 36px;
+            margin-bottom: 12px;
+          }
+          .bk-info-title {
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+          }
+          .bk-info-desc {
+            font-size: 0.72rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            max-width: 100%;
+          }
+          .bk-info-btn {
+            padding: 7px 12px;
+            font-size: 0.72rem;
+            width: 100%;
+            justify-content: center;
+          }
         }
       `}</style>
 
@@ -695,7 +727,7 @@ export default function BookingsPage() {
 
             <div className="bk-info-card bk-info-card-dark bk-up bk-d1">
               <div className="bk-info-icon">
-                <Sparkles size={20} />
+                <Crown size={20} />
               </div>
               <h4 className="bk-info-title">Become a host</h4>
               <p className="bk-info-desc">

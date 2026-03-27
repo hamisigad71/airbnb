@@ -90,9 +90,9 @@ export function Footer() {
           {/* Operating Hours */}
           <div>
             <h4 className="sl-footer-col-title">Operating Hours</h4>
-            <div style={{ padding: '12px 14px', borderRadius: 10, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.65)', marginBottom: 6 }}>Mon – Fri · 8am – 10pm EAT</div>
-              <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.65)' }}>Sat – Sun · 9am – 8pm EAT</div>
+            <div style={{ padding: '12px 14px', borderRadius: 12, background: 'oklch(0.985 0.001 0)', border: '1px solid oklch(0.92 0.002 0)' }}>
+              <div style={{ fontSize: '0.84rem', color: 'oklch(0.45 0.01 0)', marginBottom: 6, fontWeight: 500 }}>Mon – Fri · 8am – 10pm EAT</div>
+              <div style={{ fontSize: '0.84rem', color: 'oklch(0.45 0.01 0)', fontWeight: 500 }}>Sat – Sun · 9am – 8pm EAT</div>
             </div>
           </div>
         </div>
@@ -113,10 +113,17 @@ export function Footer() {
 
       <style jsx>{`
         .sl-footer {
-          background: oklch(0.1 0.001 0); /* var(--fg) equivalent for dark theme */
-          color: rgba(255,255,255,0.58);
+          --background: oklch(1 0 0);
+          --foreground: oklch(0.145 0 0);
+          --border: oklch(0.922 0 0);
+          --bg2: oklch(0.985 0.001 0);
+          --muted: oklch(0.556 0 0);
+          --fg: oklch(0.145 0 0);
+          --subtle: oklch(0.6 0.005 0);
+          background: #fff;
+          color: oklch(0.45 0.01 0);
           padding: 72px 20px 36px;
-          border-top: 1px solid rgba(255,255,255,0.05);
+          border-top: 1px solid oklch(0.92 0.002 0);
           width: 100%;
           margin-top: 80px;
         }
@@ -128,7 +135,7 @@ export function Footer() {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           gap: 40px; padding-bottom: 56px;
-          border-bottom: 1px solid rgba(255,255,255,0.08);
+          border-bottom: 1px solid oklch(0.94 0.002 0);
         }
         
         @media (max-width: 640px) {
@@ -142,15 +149,16 @@ export function Footer() {
         .sl-footer-brand-name {
           display: flex; align-items: center; gap: 10px;
           font-size: 1.3rem; font-weight: 800;
-          color: #fff; letter-spacing: -0.03em;
+          color: oklch(0.18 0.001 0); letter-spacing: -0.03em;
           margin-bottom: 14px;
         }
 
-        .sl-footer-brand-name span { color: oklch(0.65 0.155 11.87); }
+        .sl-footer-brand-name span { color: oklch(0.55 0.18 11.87); }
 
         .sl-footer-desc {
-          font-size: 0.86rem; line-height: 1.76;
+          font-size: 0.88rem; line-height: 1.7;
           max-width: 280px; margin-bottom: 22px;
+          color: oklch(0.5 0.01 0);
         }
 
         .sl-footer-socials {
@@ -158,51 +166,54 @@ export function Footer() {
         }
 
         .sl-footer-social {
-          width: 36px; height: 36px; border-radius: 9px;
-          border: 1px solid rgba(255,255,255,0.12);
-          background: rgba(255,255,255,0.04);
+          width: 36px; height: 36px; border-radius: 11px;
+          border: 1px solid oklch(0.9 0.002 0);
+          background: oklch(0.985 0.001 0);
           display: flex; align-items: center; justify-content: center;
-          color: rgba(255,255,255,0.55);
-          transition: all 0.2s; cursor: pointer;
+          color: oklch(0.45 0.01 0);
+          transition: all 0.2s cubic-bezier(.22,.68,0,1.1);
+          cursor: pointer;
         }
 
         .sl-footer-social:hover {
-          background: oklch(0.4 0.155 11.87); border-color: oklch(0.4 0.155 11.87);
-          color: #fff; transform: translateY(-2px);
+          background: oklch(0.55 0.18 11.87); border-color: oklch(0.55 0.18 11.87);
+          color: #fff; transform: translateY(-3px) rotate(-3deg);
+          box-shadow: 0 8px 20px oklch(0.55 0.18 11.87 / 0.2);
         }
 
         .sl-footer-col-title {
           font-size: 0.72rem; font-weight: 700;
-          text-transform: uppercase; letter-spacing: 0.1em;
-          color: rgba(255,255,255,0.85); margin-bottom: 16px;
+          text-transform: uppercase; letter-spacing: 0.08em;
+          color: oklch(0.25 0.001 0); margin-bottom: 18px;
         }
 
-        .sl-footer-links { display: flex; flex-direction: column; gap: 10px; }
+        .sl-footer-links { display: flex; flex-direction: column; gap: 11px; }
 
         .sl-footer-link {
-          font-size: 0.86rem; color: rgba(255,255,255,0.48);
-          text-decoration: none; transition: color 0.2s;
-          display: flex; align-items: center; gap: 5px;
+          font-size: 0.88rem; color: oklch(0.5 0.01 0);
+          text-decoration: none; transition: all 0.2s;
+          display: flex; align-items: center; gap: 6px;
         }
-        .sl-footer-link:hover { color: #fff; }
+        .sl-footer-link:hover { color: oklch(0.55 0.18 11.87); transform: translateX(3px); }
 
         .sl-footer-bottom {
-          padding-top: 30px;
+          padding-top: 32px;
           display: flex; align-items: center;
           justify-content: space-between;
           gap: 12px; flex-wrap: wrap;
-          font-size: 0.8rem;
+          font-size: 0.82rem;
+          color: oklch(0.55 0.01 0);
         }
 
         .sl-footer-bottom-right {
-          display: flex; align-items: center; gap: 20px;
+          display: flex; align-items: center; gap: 24px;
         }
 
         .sl-footer-bottom-link {
-          font-size: 0.8rem; color: rgba(255,255,255,0.35);
+          font-size: 0.82rem; color: oklch(0.6 0.005 0);
           text-decoration: none; transition: color 0.2s;
         }
-        .sl-footer-bottom-link:hover { color: rgba(255,255,255,0.7); }
+        .sl-footer-bottom-link:hover { color: oklch(0.2 0.001 0); }
       `}</style>
     </footer>
   );

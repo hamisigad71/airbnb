@@ -20,7 +20,6 @@ import {
 } from 'lucide-react';
 import { MOCK_LISTINGS, MOCK_REVIEWS } from '@/lib/mock-data';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Footer } from '@/components/shared/footer';
 
 const amenityIcons: Record<string, React.ReactNode> = {
   WiFi: <Wifi className="h-4 w-4" />,
@@ -77,20 +76,23 @@ export default function ListingDetailsPage({
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-6">
           {/* Images */}
-          <div className="space-y-2">
-            <img
-              src={listing.image}
-              alt={listing.title}
-              className="w-full h-96 object-cover rounded-lg"
-            />
-            <div className="grid grid-cols-2 gap-2">
-              {listing.images.slice(1, 3).map((image, i) => (
-                <img
-                  key={i}
-                  src={image}
-                  alt={`Gallery ${i + 1}`}
-                  className="w-full h-40 object-cover rounded-lg"
-                />
+          <div className="space-y-4">
+            <div className="overflow-hidden rounded-2xl shadow-xl">
+              <img
+                src={listing.image}
+                alt={listing.title}
+                className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700"
+              />
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {listing.images.slice(1, 5).map((image, i) => (
+                <div key={i} className="aspect-square overflow-hidden rounded-xl shadow-md border border-white/5 group">
+                  <img
+                    src={image}
+                    alt={`Gallery ${i + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -302,7 +304,7 @@ export default function ListingDetailsPage({
         </div>
       </div>
 
-      <Footer />
+      {/* Footer removed per user request for stay detail page */}
     </main>
   );
 }
